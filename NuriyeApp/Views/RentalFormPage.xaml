@@ -59,7 +59,7 @@
                           ItemsSource="{x:Bind ViewModel.Lenses, Mode=OneWay}"
                           SelectedItem="{x:Bind ViewModel.SelectedLens, Mode=TwoWay}"
                           HorizontalAlignment="Stretch"
-                          PlaceholderText="렌즈 선택 (선택)">
+                          PlaceholderText="렌즈 선택 (바디 미선택 시 전체 렌즈 표시)">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="models:InventoryItem">
                             <TextBlock>
