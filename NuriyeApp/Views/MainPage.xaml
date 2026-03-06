@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="NuriyeApp.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NuriyeApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title bar area -->
+        <Grid Grid.Row="0" Height="48" Padding="16,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="누리예 카메라 대여 관리"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Content="로그아웃"
+                    Click="LogoutButton_Click"
+                    VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Tab content -->
+        <TabView Grid.Row="1"
+                 x:Name="MainTabView"
+                 TabWidthMode="Equal"
+                 IsAddTabButtonVisible="False"
+                 SelectionChanged="MainTabView_SelectionChanged">
+
+            <TabViewItem Header="승인 대기" IsClosable="False">
+                <local:PendingPage x:Name="PendingPageControl"/>
+            </TabViewItem>
+
+            <TabViewItem Header="진행 중 대여" IsClosable="False">
+                <local:OngoingPage x:Name="OngoingPageControl"/>
+            </TabViewItem>
+
+            <TabViewItem Header="전체 이력" IsClosable="False">
+                <local:HistoryPage x:Name="HistoryPageControl"/>
+            </TabViewItem>
+
+            <TabViewItem Header="장비 목록" IsClosable="False">
+                <local:InventoryPage x:Name="InventoryPageControl"/>
+            </TabViewItem>
+
+            <TabViewItem Header="설정" IsClosable="False">
+                <local:SettingsPage x:Name="SettingsPageControl"/>
+            </TabViewItem>
+        </TabView>
+    </Grid>
+</Page>

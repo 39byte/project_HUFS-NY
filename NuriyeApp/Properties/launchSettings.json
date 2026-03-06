@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "NuriyeApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "NuriyeApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

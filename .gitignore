@@ -1,0 +1,28 @@
+# Build outputs
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Secrets
+appsettings.json
+appsettings.*.json
+
+# Claude Code
+.claude/
+
+# OS
+Thumbs.db
+.DS_Store
