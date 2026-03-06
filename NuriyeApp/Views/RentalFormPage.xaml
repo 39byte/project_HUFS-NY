@@ -130,7 +130,7 @@
                               HorizontalAlignment="Stretch"/>
                     <TextBlock Grid.Column="1" Text="~"
                                VerticalAlignment="Bottom" Margin="0,0,0,8"/>
-                    <ComboBox Grid.Column="2"
+                    <ComboBox Grid.Column="2" Header=" "
                               ItemsSource="{x:Bind ViewModel.HourItems}"
                               SelectedIndex="{x:Bind ViewModel.RentalTimeEnd, Mode=TwoWay}"
                               HorizontalAlignment="Stretch"/>
@@ -148,7 +148,7 @@
                               HorizontalAlignment="Stretch"/>
                     <TextBlock Grid.Column="1" Text="~"
                                VerticalAlignment="Bottom" Margin="0,0,0,8"/>
-                    <ComboBox Grid.Column="2"
+                    <ComboBox Grid.Column="2" Header=" "
                               ItemsSource="{x:Bind ViewModel.HourItems}"
                               SelectedIndex="{x:Bind ViewModel.ReturnTimeEnd, Mode=TwoWay}"
                               HorizontalAlignment="Stretch"/>
