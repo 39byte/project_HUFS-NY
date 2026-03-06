@@ -16,7 +16,7 @@ namespace NuriyeApp
 
             RootFrame = new Frame();
             Content = RootFrame;
-            RootFrame.Navigate(typeof(LoginPage));
+            RootFrame.Navigate(typeof(ShellPage));
         }
     }
 }

@@ -65,6 +65,13 @@ namespace NuriyeApp.ViewModels
 
             int startDow = (int)_currentMonth.DayOfWeek;
 
+            rentals.Sort((a, b) =>
+            {
+                var daysA = (DateTime.Parse(a.EndDate) - DateTime.Parse(a.StartDate)).Days;
+                var daysB = (DateTime.Parse(b.EndDate) - DateTime.Parse(b.StartDate)).Days;
+                return daysB.CompareTo(daysA); // 내림차순
+            });
+
             var colorMap = new Dictionary<int, string>();
             int ci = 0;
             foreach (var r in rentals)
