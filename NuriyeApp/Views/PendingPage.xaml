@@ -51,10 +51,10 @@
                         <Border Background="{ThemeResource NuriyeSurfaceBrush}"
                                 BorderBrush="{ThemeResource NuriyeBorderBrush}"
                                 BorderThickness="1"
-                                CornerRadius="10"
-                                Padding="16"
-                                Margin="0,0,0,8">
-                            <Grid RowSpacing="6">
+                                CornerRadius="12"
+                                Padding="20"
+                                Margin="0,0,0,10">
+                            <Grid RowSpacing="8">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -67,16 +67,16 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0" Spacing="2">
+                                    <StackPanel Grid.Column="0" Spacing="3">
                                         <TextBlock Text="{x:Bind Applicant}"
-                                                   Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                                   FontSize="16" FontWeight="SemiBold"/>
                                         <TextBlock Text="{x:Bind Contact}"
-                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   FontSize="13"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                                     </StackPanel>
                                     <TextBlock Grid.Column="1"
                                                Text="{x:Bind SubmittedAt}"
-                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                               FontSize="13"
                                                Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                                VerticalAlignment="Top"/>
                                 </Grid>
@@ -84,22 +84,23 @@
                                 <!-- Row 1: Equipment -->
                                 <TextBlock Grid.Row="1"
                                            Text="{x:Bind Equipment}"
+                                           FontSize="15"
                                            TextWrapping="Wrap"
                                            Margin="0,4,0,0"/>
 
                                 <!-- Row 2: Period badge + Accessories badge -->
-                                <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
-                                    <Border Background="#E8F5E9" CornerRadius="4" Padding="8,3">
-                                        <TextBlock Foreground="#2E7D32" FontSize="11" FontWeight="SemiBold">
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="10" Margin="0,5,0,0">
+                                    <Border Background="#E8F5E9" CornerRadius="5" Padding="10,4">
+                                        <TextBlock Foreground="#2E7D32" FontSize="13" FontWeight="SemiBold">
                                             <Run Text="{x:Bind StartDate}"/>
                                             <Run Text=" ~ "/>
                                             <Run Text="{x:Bind EndDate}"/>
                                         </TextBlock>
                                     </Border>
                                     <Border Background="{ThemeResource NuriyeSurfaceAltBrush}"
-                                            CornerRadius="4" Padding="8,3">
+                                            CornerRadius="5" Padding="10,4">
                                         <TextBlock Text="{x:Bind Accessories}"
-                                                   FontSize="11"
+                                                   FontSize="13"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                                     </Border>
                                 </StackPanel>
