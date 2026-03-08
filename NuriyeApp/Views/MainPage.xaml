@@ -37,7 +37,26 @@
                  IsAddTabButtonVisible="False"
                  SelectionChanged="MainTabView_SelectionChanged">
 
-            <TabViewItem Header="&#xC2B9;&#xC778; &#xB300;&#xAE30;" IsClosable="False">
+            <TabViewItem IsClosable="False">
+                <TabViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <TextBlock Text="&#xC2B9;&#xC778; &#xB300;&#xAE30;" VerticalAlignment="Center"/>
+                        <Border x:Name="PendingBadge"
+                                Background="#EF5350"
+                                CornerRadius="10"
+                                MinWidth="20" Height="20"
+                                Padding="5,0"
+                                VerticalAlignment="Center"
+                                Visibility="Collapsed">
+                            <TextBlock x:Name="PendingBadgeText"
+                                       Foreground="White"
+                                       FontSize="11"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </TabViewItem.Header>
                 <local:PendingPage x:Name="PendingPageControl"/>
             </TabViewItem>
 
