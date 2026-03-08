@@ -39,6 +39,7 @@
                     Content="로그아웃"
                     Click="Logout_Click"
                     HorizontalAlignment="Stretch"
+                    Visibility="Collapsed"
                     Margin="8,4,8,12"/>
         </NavigationView.PaneFooter>
 

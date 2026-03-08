@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using NuriyeApp.Services;
+using Windows.Globalization;
 
 namespace NuriyeApp
 {
@@ -10,6 +11,7 @@ namespace NuriyeApp
         public App()
         {
             InitializeComponent();
+            ApplicationLanguages.PrimaryLanguageOverride = "ko-KR";
         }
 
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)

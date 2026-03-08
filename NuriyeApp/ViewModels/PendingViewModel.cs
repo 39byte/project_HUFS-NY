@@ -41,12 +41,6 @@ namespace NuriyeApp.ViewModels
         public bool HasSelection => SelectedRental != null;
         public bool HasNoSelection => SelectedRental == null;
 
-        partial void OnSelectedRentalChanging(Rental? value)
-        {
-            OnPropertyChanged(nameof(HasSelection));
-            OnPropertyChanged(nameof(HasNoSelection));
-        }
-
         [RelayCommand]
         public async Task LoadAsync()
         {
@@ -75,6 +69,8 @@ namespace NuriyeApp.ViewModels
                 SelectedStaff = value.Staff;
                 Remarks = value.Remarks;
             }
+            OnPropertyChanged(nameof(HasSelection));
+            OnPropertyChanged(nameof(HasNoSelection));
         }
 
         [RelayCommand]

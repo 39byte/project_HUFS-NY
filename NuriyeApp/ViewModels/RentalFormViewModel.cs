@@ -70,6 +70,8 @@ namespace NuriyeApp.ViewModels
                     .Select(i => i.BodyCategory)
                     .Distinct())
                     Categories.Add(cat);
+
+                RefreshLenses(null);
             }
             catch (Exception ex)
             {
@@ -89,16 +91,24 @@ namespace NuriyeApp.ViewModels
 
         partial void OnSelectedBodyChanged(InventoryItem? value)
         {
+            RefreshLenses(value);
+        }
+
+        private void RefreshLenses(InventoryItem? selectedBody)
+        {
             Lenses.Clear();
             SelectedLens = null;
+
             var lenses = _allInventory.Where(i => i.Category == "Lens").AsEnumerable();
-            if (value != null)
+
+            if (selectedBody != null)
             {
-                if (value.Brand?.Contains("Canon") == true)
+                if (selectedBody.Brand?.Contains("Canon") == true)
                     lenses = lenses.Where(l => l.Brand?.Contains("Canon") == true || l.Brand?.Contains("Tamron") == true);
-                if (value.Format == "FF")
+                if (selectedBody.Format == "FF")
                     lenses = lenses.Where(l => l.Format == "FF");
             }
+
             foreach (var l in lenses) Lenses.Add(l);
         }
 
