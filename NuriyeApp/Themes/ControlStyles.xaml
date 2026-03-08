@@ -1,0 +1,58 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ══════════ Global Corner Radius Override ══════════ -->
+    <CornerRadius x:Key="ControlCornerRadius">8</CornerRadius>
+
+    <!-- ══════════ Button Styles ══════════ -->
+
+    <!-- Default Button: Nuriye surface background -->
+    <Style x:Key="NuriyeDefaultButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Background" Value="{ThemeResource NuriyeSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource NuriyeBorderBrush}"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+
+    <!-- Accent Button: Brand dark background, white text -->
+    <Style x:Key="NuriyeAccentButtonStyle" TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
+        <Setter Property="Background" Value="{ThemeResource NuriyeBrandDarkBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+
+    <!-- ══════════ Input Control Styles ══════════ -->
+
+    <!-- TextBox -->
+    <Style x:Key="NuriyeTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Background" Value="{ThemeResource NuriyeInputBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource NuriyeBorderBrush}"/>
+    </Style>
+
+    <!-- PasswordBox -->
+    <Style x:Key="NuriyePasswordBoxStyle" TargetType="PasswordBox" BasedOn="{StaticResource DefaultPasswordBoxStyle}">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Background" Value="{ThemeResource NuriyeInputBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource NuriyeBorderBrush}"/>
+    </Style>
+
+    <!-- ComboBox -->
+    <Style x:Key="NuriyeComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource DefaultComboBoxStyle}">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Background" Value="{ThemeResource NuriyeInputBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource NuriyeBorderBrush}"/>
+    </Style>
+
+    <!-- ══════════ ListView Item Container Style ══════════ -->
+    <Style x:Key="NuriyeListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Margin" Value="0,2"/>
+    </Style>
+
+    <!-- ══════════ InfoBar ══════════ -->
+    <Style x:Key="NuriyeInfoBarStyle" TargetType="InfoBar">
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+
+</ResourceDictionary>

@@ -9,186 +9,250 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <Grid Padding="24,16">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer>
+        <StackPanel MaxWidth="720"
+                    HorizontalAlignment="Center"
+                    Padding="24,16"
+                    Spacing="20">
 
-        <TextBlock Grid.Row="0"
-                   Text="대여 신청"
-                   Style="{StaticResource TitleTextBlockStyle}"
-                   Margin="0,0,0,12"/>
+            <!-- Title -->
+            <TextBlock Text="&#xB300;&#xC5EC; &#xC2E0;&#xCCAD;"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       Margin="0,0,0,4"/>
 
-        <Grid Grid.Row="1" ColumnSpacing="24">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <!-- 2-Column Layout -->
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <!-- ── 좌측: 장비 선택 + 액세서리 ── -->
-            <StackPanel Grid.Column="0" Spacing="14" VerticalAlignment="Top">
+                <!-- ══════════ Left Column: Equipment + Accessories + Extra Request ══════════ -->
+                <StackPanel Grid.Column="0" Spacing="14">
 
-                <TextBlock Text="장비 선택"
-                           Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    <!-- Section: Equipment Selection -->
+                    <Border BorderBrush="{ThemeResource NuriyeBrandDarkBrush}"
+                            BorderThickness="0,0,0,2"
+                            Padding="0,0,0,6">
+                        <TextBlock Text="&#xC7A5;&#xBE44; &#xC120;&#xD0DD;"
+                                   Style="{StaticResource NuriyeSectionHeaderStyle}"/>
+                    </Border>
 
-                <ComboBox Header="카메라 카테고리"
-                          ItemsSource="{x:Bind ViewModel.Categories}"
-                          SelectedItem="{x:Bind ViewModel.SelectedCategory, Mode=TwoWay}"
-                          HorizontalAlignment="Stretch"
-                          PlaceholderText="카테고리 선택"/>
+                    <ComboBox Header="&#xCE74;&#xBA54;&#xB77C; &#xCE74;&#xD14C;&#xACE0;&#xB9AC;"
+                              ItemsSource="{x:Bind ViewModel.Categories}"
+                              SelectedItem="{x:Bind ViewModel.SelectedCategory, Mode=TwoWay}"
+                              HorizontalAlignment="Stretch"
+                              PlaceholderText="&#xCE74;&#xD14C;&#xACE0;&#xB9AC; &#xC120;&#xD0DD;"
+                              Style="{StaticResource NuriyeComboBoxStyle}"/>
 
-                <ComboBox Header="카메라 바디"
-                          ItemsSource="{x:Bind ViewModel.Bodies, Mode=OneWay}"
-                          SelectedItem="{x:Bind ViewModel.SelectedBody, Mode=TwoWay}"
-                          HorizontalAlignment="Stretch"
-                          PlaceholderText="바디 선택 (선택)">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate x:DataType="models:InventoryItem">
-                            <TextBlock>
-                                <Run Text="{x:Bind Brand}"/>
-                                <Run Text=" "/>
-                                <Run Text="{x:Bind ModelName}"/>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    <ComboBox Header="&#xCE74;&#xBA54;&#xB77C; &#xBC14;&#xB514;"
+                              ItemsSource="{x:Bind ViewModel.Bodies, Mode=OneWay}"
+                              SelectedItem="{x:Bind ViewModel.SelectedBody, Mode=TwoWay}"
+                              HorizontalAlignment="Stretch"
+                              PlaceholderText="&#xBC14;&#xB514; &#xC120;&#xD0DD; (&#xC120;&#xD0DD;)"
+                              Style="{StaticResource NuriyeComboBoxStyle}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:InventoryItem">
+                                <TextBlock>
+                                    <Run Text="{x:Bind Brand}"/>
+                                    <Run Text=" "/>
+                                    <Run Text="{x:Bind ModelName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
-                <ComboBox Header="렌즈"
-                          ItemsSource="{x:Bind ViewModel.Lenses, Mode=OneWay}"
-                          SelectedItem="{x:Bind ViewModel.SelectedLens, Mode=TwoWay}"
-                          HorizontalAlignment="Stretch"
-                          PlaceholderText="렌즈 선택 (바디 미선택 시 전체 렌즈 표시)">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate x:DataType="models:InventoryItem">
-                            <TextBlock>
-                                <Run Text="{x:Bind Brand}"/>
-                                <Run Text=" "/>
-                                <Run Text="{x:Bind ModelName}"/>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    <ComboBox Header="&#xB80C;&#xC988;"
+                              ItemsSource="{x:Bind ViewModel.Lenses, Mode=OneWay}"
+                              SelectedItem="{x:Bind ViewModel.SelectedLens, Mode=TwoWay}"
+                              HorizontalAlignment="Stretch"
+                              PlaceholderText="&#xB80C;&#xC988; &#xC120;&#xD0DD; (&#xBC14;&#xB514; &#xBBF8;&#xC120;&#xD0DD; &#xC2DC; &#xC804;&#xCCB4; &#xB80C;&#xC988; &#xD45C;&#xC2DC;)"
+                              Style="{StaticResource NuriyeComboBoxStyle}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:InventoryItem">
+                                <TextBlock>
+                                    <Run Text="{x:Bind Brand}"/>
+                                    <Run Text=" "/>
+                                    <Run Text="{x:Bind ModelName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
-                <TextBlock Text="액세서리"
-                           Style="{StaticResource SubtitleTextBlockStyle}"
-                           Margin="0,4,0,0"/>
+                    <!-- Section: Accessories -->
+                    <Border BorderBrush="{ThemeResource NuriyeBrandDarkBrush}"
+                            BorderThickness="0,0,0,2"
+                            Padding="0,0,0,6"
+                            Margin="0,4,0,0">
+                        <TextBlock Text="&#xC561;&#xC138;&#xC11C;&#xB9AC;"
+                                   Style="{StaticResource NuriyeSectionHeaderStyle}"/>
+                    </Border>
 
-                <StackPanel Orientation="Horizontal" Spacing="8">
-                    <ToggleButton Content="충전기"
-                                  IsChecked="{x:Bind ViewModel.HasCharger, Mode=TwoWay}"/>
-                    <ToggleButton Content="SD 리더기"
-                                  IsChecked="{x:Bind ViewModel.HasSdReader, Mode=TwoWay}"/>
-                    <ToggleButton Content="가방"
-                                  IsChecked="{x:Bind ViewModel.HasBag, Mode=TwoWay}"/>
-                    <ToggleButton Content="삼각대"
-                                  IsChecked="{x:Bind ViewModel.HasTripod, Mode=TwoWay}"/>
+                    <Grid ColumnSpacing="8" RowSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ToggleButton Grid.Row="0" Grid.Column="0"
+                                      Content="&#xCDA9;&#xC804;&#xAE30;"
+                                      IsChecked="{x:Bind ViewModel.HasCharger, Mode=TwoWay}"
+                                      HorizontalAlignment="Stretch"
+                                      CornerRadius="8"/>
+                        <ToggleButton Grid.Row="0" Grid.Column="1"
+                                      Content="SD &#xB9AC;&#xB354;&#xAE30;"
+                                      IsChecked="{x:Bind ViewModel.HasSdReader, Mode=TwoWay}"
+                                      HorizontalAlignment="Stretch"
+                                      CornerRadius="8"/>
+                        <ToggleButton Grid.Row="1" Grid.Column="0"
+                                      Content="&#xAC00;&#xBC29;"
+                                      IsChecked="{x:Bind ViewModel.HasBag, Mode=TwoWay}"
+                                      HorizontalAlignment="Stretch"
+                                      CornerRadius="8"/>
+                        <ToggleButton Grid.Row="1" Grid.Column="1"
+                                      Content="&#xC0BC;&#xAC01;&#xB300;"
+                                      IsChecked="{x:Bind ViewModel.HasTripod, Mode=TwoWay}"
+                                      HorizontalAlignment="Stretch"
+                                      CornerRadius="8"/>
+                    </Grid>
+
+                    <!-- Section: Extra Request -->
+                    <Border BorderBrush="{ThemeResource NuriyeBrandDarkBrush}"
+                            BorderThickness="0,0,0,2"
+                            Padding="0,0,0,6"
+                            Margin="0,4,0,0">
+                        <TextBlock Text="&#xCD94;&#xAC00; &#xC694;&#xCCAD;&#xC0AC;&#xD56D;"
+                                   Style="{StaticResource NuriyeSectionHeaderStyle}"/>
+                    </Border>
+
+                    <TextBox Text="{x:Bind ViewModel.ExtraRequest, Mode=TwoWay}"
+                             PlaceholderText="&#xD2B9;&#xC774;&#xC0AC;&#xD56D;&#xC744; &#xC785;&#xB825;&#xD558;&#xC138;&#xC694;"
+                             AcceptsReturn="True"
+                             Height="120"
+                             TextWrapping="Wrap"
+                             Style="{StaticResource NuriyeTextBoxStyle}"/>
                 </StackPanel>
 
-            </StackPanel>
+                <!-- ══════════ Right Column: Applicant + Period + Meeting Time ══════════ -->
+                <StackPanel Grid.Column="1" Spacing="14">
 
-            <!-- ── 중앙: 신청자 정보 + 대여 기간 + 대면 가능 시간 ── -->
-            <StackPanel Grid.Column="1" Spacing="14" VerticalAlignment="Top">
+                    <!-- Section: Applicant Info -->
+                    <Border BorderBrush="{ThemeResource NuriyeBrandDarkBrush}"
+                            BorderThickness="0,0,0,2"
+                            Padding="0,0,0,6">
+                        <TextBlock Text="&#xC2E0;&#xCCAD;&#xC790; &#xC815;&#xBCF4;"
+                                   Style="{StaticResource NuriyeSectionHeaderStyle}"/>
+                    </Border>
 
-                <TextBlock Text="신청자 정보"
-                           Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    <TextBox Header="&#xC774;&#xB984;"
+                             Text="{x:Bind ViewModel.ApplicantName, Mode=TwoWay}"
+                             PlaceholderText="&#xC774;&#xB984;&#xC744; &#xC785;&#xB825;&#xD558;&#xC138;&#xC694;"
+                             Style="{StaticResource NuriyeTextBoxStyle}"/>
 
-                <TextBox Header="이름"
-                         Text="{x:Bind ViewModel.ApplicantName, Mode=TwoWay}"
-                         PlaceholderText="이름을 입력하세요"/>
+                    <TextBox Header="&#xC5F0;&#xB77D;&#xCC98;"
+                             Text="{x:Bind ViewModel.Contact, Mode=TwoWay}"
+                             PlaceholderText="010-0000-0000"
+                             Style="{StaticResource NuriyeTextBoxStyle}"/>
 
-                <TextBox Header="연락처"
-                         Text="{x:Bind ViewModel.Contact, Mode=TwoWay}"
-                         PlaceholderText="010-0000-0000"/>
+                    <!-- Section: Rental Period -->
+                    <Border BorderBrush="{ThemeResource NuriyeBrandDarkBrush}"
+                            BorderThickness="0,0,0,2"
+                            Padding="0,0,0,6"
+                            Margin="0,4,0,0">
+                        <TextBlock Text="&#xB300;&#xC5EC; &#xAE30;&#xAC04;"
+                                   Style="{StaticResource NuriyeSectionHeaderStyle}"/>
+                    </Border>
 
-                <TextBlock Text="대여 기간"
-                           Style="{StaticResource SubtitleTextBlockStyle}"
-                           Margin="0,4,0,0"/>
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker Grid.Column="0"
+                                    Header="&#xB300;&#xC5EC; &#xC2DC;&#xC791;&#xC77C;"
+                                    Date="{x:Bind ViewModel.StartDate, Mode=TwoWay}"
+                                    HorizontalAlignment="Stretch"/>
+                        <DatePicker Grid.Column="1"
+                                    Header="&#xBC18;&#xB0A9; &#xC608;&#xC815;&#xC77C;"
+                                    Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}"
+                                    HorizontalAlignment="Stretch"/>
+                    </Grid>
 
-                <DatePicker Header="대여 시작일"
-                            Date="{x:Bind ViewModel.StartDate, Mode=TwoWay}"
-                            HorizontalAlignment="Stretch"/>
+                    <!-- Section: Meeting Time -->
+                    <Border BorderBrush="{ThemeResource NuriyeBrandDarkBrush}"
+                            BorderThickness="0,0,0,2"
+                            Padding="0,0,0,6"
+                            Margin="0,4,0,0">
+                        <TextBlock Text="&#xB300;&#xBA74; &#xAC00;&#xB2A5; &#xC2DC;&#xAC04;"
+                                   Style="{StaticResource NuriyeSectionHeaderStyle}"/>
+                    </Border>
 
-                <DatePicker Header="반납 예정일 (최대 7일)"
-                            Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}"
-                            HorizontalAlignment="Stretch"/>
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" Header="&#xB300;&#xC5EC;"
+                                  ItemsSource="{x:Bind ViewModel.HourItems}"
+                                  SelectedIndex="{x:Bind ViewModel.RentalTimeStart, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource NuriyeComboBoxStyle}"/>
+                        <TextBlock Grid.Column="1" Text="~"
+                                   VerticalAlignment="Bottom" Margin="0,0,0,8"/>
+                        <ComboBox Grid.Column="2" Header=" "
+                                  ItemsSource="{x:Bind ViewModel.HourItems}"
+                                  SelectedIndex="{x:Bind ViewModel.RentalTimeEnd, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource NuriyeComboBoxStyle}"/>
+                    </Grid>
 
-                <TextBlock Text="대면 가능 시간"
-                           Style="{StaticResource SubtitleTextBlockStyle}"
-                           Margin="0,4,0,0"/>
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" Header="&#xBC18;&#xB0A9;"
+                                  ItemsSource="{x:Bind ViewModel.HourItems}"
+                                  SelectedIndex="{x:Bind ViewModel.ReturnTimeStart, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource NuriyeComboBoxStyle}"/>
+                        <TextBlock Grid.Column="1" Text="~"
+                                   VerticalAlignment="Bottom" Margin="0,0,0,8"/>
+                        <ComboBox Grid.Column="2" Header=" "
+                                  ItemsSource="{x:Bind ViewModel.HourItems}"
+                                  SelectedIndex="{x:Bind ViewModel.ReturnTimeEnd, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource NuriyeComboBoxStyle}"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
 
-                <Grid ColumnSpacing="8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <ComboBox Grid.Column="0" Header="대여"
-                              ItemsSource="{x:Bind ViewModel.HourItems}"
-                              SelectedIndex="{x:Bind ViewModel.RentalTimeStart, Mode=TwoWay}"
-                              HorizontalAlignment="Stretch"/>
-                    <TextBlock Grid.Column="1" Text="~"
-                               VerticalAlignment="Bottom" Margin="0,0,0,8"/>
-                    <ComboBox Grid.Column="2" Header=" "
-                              ItemsSource="{x:Bind ViewModel.HourItems}"
-                              SelectedIndex="{x:Bind ViewModel.RentalTimeEnd, Mode=TwoWay}"
-                              HorizontalAlignment="Stretch"/>
-                </Grid>
+            <!-- ══════════ Bottom: Submit + Status ══════════ -->
+            <InfoBar IsOpen="{x:Bind ViewModel.IsSuccess, Mode=OneWay}"
+                     IsClosable="False"
+                     Severity="Success"
+                     Title="&#xC2E0;&#xCCAD; &#xC644;&#xB8CC;"
+                     Message="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
+                     CornerRadius="10"/>
 
-                <Grid ColumnSpacing="8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <ComboBox Grid.Column="0" Header="반납"
-                              ItemsSource="{x:Bind ViewModel.HourItems}"
-                              SelectedIndex="{x:Bind ViewModel.ReturnTimeStart, Mode=TwoWay}"
-                              HorizontalAlignment="Stretch"/>
-                    <TextBlock Grid.Column="1" Text="~"
-                               VerticalAlignment="Bottom" Margin="0,0,0,8"/>
-                    <ComboBox Grid.Column="2" Header=" "
-                              ItemsSource="{x:Bind ViewModel.HourItems}"
-                              SelectedIndex="{x:Bind ViewModel.ReturnTimeEnd, Mode=TwoWay}"
-                              HorizontalAlignment="Stretch"/>
-                </Grid>
+            <TextBlock Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
+                       Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                       Visibility="{x:Bind ViewModel.HasError, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                       TextWrapping="Wrap"/>
 
-            </StackPanel>
+            <Button Content="&#xC2E0;&#xCCAD;&#xD558;&#xAE30;"
+                    Command="{x:Bind ViewModel.SubmitCommand}"
+                    HorizontalAlignment="Stretch"
+                    Style="{StaticResource NuriyeAccentButtonStyle}"
+                    IsEnabled="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"/>
 
-            <!-- ── 우측: 추가 요청 + 결과 메시지 + 제출 ── -->
-            <StackPanel Grid.Column="2" Spacing="14" VerticalAlignment="Top">
-
-                <TextBox Header="추가 요청사항 (선택)"
-                         Text="{x:Bind ViewModel.ExtraRequest, Mode=TwoWay}"
-                         PlaceholderText="특이사항을 입력하세요"
-                         AcceptsReturn="True"
-                         Height="120"
-                         TextWrapping="Wrap"/>
-
-                <InfoBar IsOpen="{x:Bind ViewModel.IsSuccess, Mode=OneWay}"
-                         IsClosable="False"
-                         Severity="Success"
-                         Title="신청 완료"
-                         Message="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"/>
-
-                <TextBlock Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
-                           Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                           Visibility="{x:Bind ViewModel.HasError, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
-                           TextWrapping="Wrap"/>
-
-                <Button Content="신청하기"
-                        Command="{x:Bind ViewModel.SubmitCommand}"
-                        HorizontalAlignment="Stretch"
-                        Style="{StaticResource AccentButtonStyle}"
-                        IsEnabled="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
-                        Margin="0,8,0,0"/>
-
-                <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
-                              HorizontalAlignment="Center"/>
-
-            </StackPanel>
-
-        </Grid>
-    </Grid>
+            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                          HorizontalAlignment="Center"/>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

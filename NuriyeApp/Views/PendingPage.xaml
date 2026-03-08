@@ -15,7 +15,7 @@
             <ColumnDefinition Width="320"/>
         </Grid.ColumnDefinitions>
 
-        <!-- 신청 목록 -->
+        <!-- Rental List -->
         <Grid Grid.Column="0" Margin="0,0,12,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -24,11 +24,12 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8">
-                <TextBlock Text="승인 대기 목록"
+                <TextBlock Text="&#xC2B9;&#xC778; &#xB300;&#xAE30; &#xBAA9;&#xB85D;"
                            Style="{StaticResource SubtitleTextBlockStyle}"
                            VerticalAlignment="Center"/>
-                <Button Content="새로고침"
-                        Command="{x:Bind ViewModel.LoadCommand}"/>
+                <Button Content="&#xC0C8;&#xB85C;&#xACE0;&#xCE68;"
+                        Command="{x:Bind ViewModel.LoadCommand}"
+                        Style="{StaticResource NuriyeDefaultButtonStyle}"/>
                 <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
                               Width="20" Height="20"/>
             </StackPanel>
@@ -37,6 +38,12 @@
                       ItemsSource="{x:Bind ViewModel.Rentals, Mode=OneWay}"
                       SelectedItem="{x:Bind ViewModel.SelectedRental, Mode=TwoWay}"
                       SelectionMode="Single">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="Margin" Value="0,2"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Rental">
                         <Grid Padding="8" ColumnSpacing="12">
@@ -50,11 +57,11 @@
                                            Style="{StaticResource BodyStrongTextBlockStyle}"/>
                                 <TextBlock Text="{x:Bind Contact}"
                                            Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                           Foreground="{ThemeResource NuriyeTextSecondaryBrush}"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Spacing="2">
                                 <TextBlock Text="{x:Bind Equipment}" TextWrapping="Wrap"/>
-                                <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                <TextBlock Foreground="{ThemeResource NuriyeTextSecondaryBrush}"
                                            Style="{StaticResource CaptionTextBlockStyle}">
                                     <Run Text="{x:Bind StartDate}"/>
                                     <Run Text=" ~ "/>
@@ -62,12 +69,12 @@
                                 </TextBlock>
                                 <TextBlock Text="{x:Bind Accessories}"
                                            Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                           Foreground="{ThemeResource NuriyeTextSecondaryBrush}"/>
                             </StackPanel>
                             <TextBlock Grid.Column="2"
                                        Text="{x:Bind SubmittedAt}"
                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       Foreground="{ThemeResource NuriyeTextSecondaryBrush}"
                                        VerticalAlignment="Top"/>
                         </Grid>
                     </DataTemplate>
@@ -80,70 +87,79 @@
                        Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
         </Grid>
 
-        <!-- 처리 패널 -->
-        <ScrollViewer Grid.Column="1">
-            <StackPanel Spacing="12">
-                <TextBlock Text="신청 처리"
-                           Style="{StaticResource SubtitleTextBlockStyle}"/>
+        <!-- Processing Panel -->
+        <Border Grid.Column="1"
+                Background="{ThemeResource NuriyeSurfaceAltBrush}"
+                CornerRadius="12"
+                Padding="16">
+            <ScrollViewer>
+                <StackPanel Spacing="12">
+                    <TextBlock Text="&#xC2E0;&#xCCAD; &#xCC98;&#xB9AC;"
+                               Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-                <TextBlock Text="선택된 신청이 없습니다."
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                           Visibility="{x:Bind ViewModel.HasNoSelection, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <TextBlock Text="&#xC120;&#xD0DD;&#xB41C; &#xC2E0;&#xCCAD;&#xC774; &#xC5C6;&#xC2B5;&#xB2C8;&#xB2E4;."
+                               Foreground="{ThemeResource NuriyeTextSecondaryBrush}"
+                               Visibility="{x:Bind ViewModel.HasNoSelection, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-                <StackPanel Spacing="12"
-                            Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <StackPanel Spacing="12"
+                                Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
 
-                    <InfoBar IsOpen="True" IsClosable="False" Severity="Informational"
-                             x:Name="RentalInfoBar">
-                        <InfoBar.Content>
-                            <StackPanel Spacing="4" Padding="0,4,0,8">
-                                <TextBlock Text="{x:Bind ViewModel.SelectedRental.Equipment, Mode=OneWay}"
-                                           Style="{StaticResource BodyStrongTextBlockStyle}"
-                                           TextWrapping="Wrap"/>
-                                <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                                    <Run Text="{x:Bind ViewModel.SelectedRental.StartDate, Mode=OneWay}"/>
-                                    <Run Text=" ~ "/>
-                                    <Run Text="{x:Bind ViewModel.SelectedRental.EndDate, Mode=OneWay}"/>
-                                </TextBlock>
-                                <TextBlock Text="{x:Bind ViewModel.SelectedRental.MeetingTime, Mode=OneWay}"
-                                           Style="{StaticResource CaptionTextBlockStyle}"/>
-                                <TextBlock Text="{x:Bind ViewModel.SelectedRental.Accessories, Mode=OneWay}"
-                                           Style="{StaticResource CaptionTextBlockStyle}"/>
-                                <TextBlock Text="{x:Bind ViewModel.SelectedRental.ExtraRequest, Mode=OneWay}"
-                                           Style="{StaticResource CaptionTextBlockStyle}"/>
-                            </StackPanel>
-                        </InfoBar.Content>
-                    </InfoBar>
+                        <InfoBar IsOpen="True" IsClosable="False" Severity="Informational"
+                                 CornerRadius="10"
+                                 x:Name="RentalInfoBar">
+                            <InfoBar.Content>
+                                <StackPanel Spacing="4" Padding="0,4,0,8">
+                                    <TextBlock Text="{x:Bind ViewModel.SelectedRental.Equipment, Mode=OneWay}"
+                                               Style="{StaticResource BodyStrongTextBlockStyle}"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock Foreground="{ThemeResource NuriyeTextSecondaryBrush}">
+                                        <Run Text="{x:Bind ViewModel.SelectedRental.StartDate, Mode=OneWay}"/>
+                                        <Run Text=" ~ "/>
+                                        <Run Text="{x:Bind ViewModel.SelectedRental.EndDate, Mode=OneWay}"/>
+                                    </TextBlock>
+                                    <TextBlock Text="{x:Bind ViewModel.SelectedRental.MeetingTime, Mode=OneWay}"
+                                               Style="{StaticResource CaptionTextBlockStyle}"/>
+                                    <TextBlock Text="{x:Bind ViewModel.SelectedRental.Accessories, Mode=OneWay}"
+                                               Style="{StaticResource CaptionTextBlockStyle}"/>
+                                    <TextBlock Text="{x:Bind ViewModel.SelectedRental.ExtraRequest, Mode=OneWay}"
+                                               Style="{StaticResource CaptionTextBlockStyle}"/>
+                                </StackPanel>
+                            </InfoBar.Content>
+                        </InfoBar>
 
-                    <ComboBox Header="담당자"
-                              ItemsSource="{x:Bind ViewModel.StaffList}"
-                              SelectedItem="{x:Bind ViewModel.SelectedStaff, Mode=TwoWay}"
-                              HorizontalAlignment="Stretch"/>
+                        <ComboBox Header="&#xB2F4;&#xB2F9;&#xC790;"
+                                  ItemsSource="{x:Bind ViewModel.StaffList}"
+                                  SelectedItem="{x:Bind ViewModel.SelectedStaff, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource NuriyeComboBoxStyle}"/>
 
-                    <TextBox Header="비고"
-                             Text="{x:Bind ViewModel.Remarks, Mode=TwoWay}"
-                             PlaceholderText="비고 입력 (선택)"
-                             AcceptsReturn="True"
-                             Height="80"
-                             TextWrapping="Wrap"/>
+                        <TextBox Header="&#xBE44;&#xACE0;"
+                                 Text="{x:Bind ViewModel.Remarks, Mode=TwoWay}"
+                                 PlaceholderText="&#xBE44;&#xACE0; &#xC785;&#xB825; (&#xC120;&#xD0DD;)"
+                                 AcceptsReturn="True"
+                                 Height="80"
+                                 TextWrapping="Wrap"
+                                 Style="{StaticResource NuriyeTextBoxStyle}"/>
 
-                    <Grid ColumnSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0"
-                                Content="승인"
-                                Command="{x:Bind ViewModel.ApproveCommand}"
-                                HorizontalAlignment="Stretch"
-                                Style="{StaticResource AccentButtonStyle}"/>
-                        <Button Grid.Column="1"
-                                Content="반려"
-                                Command="{x:Bind ViewModel.RejectCommand}"
-                                HorizontalAlignment="Stretch"/>
-                    </Grid>
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                    Content="&#xC2B9;&#xC778;"
+                                    Command="{x:Bind ViewModel.ApproveCommand}"
+                                    HorizontalAlignment="Stretch"
+                                    Style="{StaticResource NuriyeAccentButtonStyle}"/>
+                            <Button Grid.Column="1"
+                                    Content="&#xBC18;&#xB824;"
+                                    Command="{x:Bind ViewModel.RejectCommand}"
+                                    HorizontalAlignment="Stretch"
+                                    Style="{StaticResource NuriyeDefaultButtonStyle}"/>
+                        </Grid>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Page>

@@ -15,39 +15,42 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1"
-                    Width="360"
-                    HorizontalAlignment="Center"
-                    Spacing="16">
+        <Border Grid.Row="1"
+                Style="{StaticResource NuriyeCardStyle}"
+                Width="360">
 
-            <StackPanel Spacing="4" HorizontalAlignment="Center">
-                <TextBlock Text="누리예 카메라 대여"
-                           Style="{StaticResource TitleLargeTextBlockStyle}"
-                           HorizontalAlignment="Center"/>
-                <TextBlock Text="집행부 전용 관리 시스템"
-                           Style="{StaticResource BodyTextBlockStyle}"
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                           HorizontalAlignment="Center"/>
+            <StackPanel Spacing="16">
+                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                    <TextBlock Text="&#xB204;&#xB9AC;&#xC608; &#xCE74;&#xBA54;&#xB77C; &#xB300;&#xC5EC;"
+                               Style="{StaticResource TitleLargeTextBlockStyle}"
+                               Foreground="{ThemeResource NuriyeBrandDeepBrush}"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="&#xC9D1;&#xD589;&#xBD80; &#xC804;&#xC6A9; &#xAD00;&#xB9AC; &#xC2DC;&#xC2A4;&#xD15C;"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Foreground="{ThemeResource NuriyeTextSecondaryBrush}"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <PasswordBox x:Name="PasswordBox"
+                             Header="&#xAD00;&#xB9AC;&#xC790; &#xBE44;&#xBC00;&#xBC88;&#xD638;"
+                             PlaceholderText="&#xBE44;&#xBC00;&#xBC88;&#xD638;&#xB97C; &#xC785;&#xB825;&#xD558;&#xC138;&#xC694;"
+                             Password="{x:Bind ViewModel.Password, Mode=TwoWay}"
+                             KeyDown="PasswordBox_KeyDown"
+                             Style="{StaticResource NuriyePasswordBoxStyle}"/>
+
+                <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                           Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                           Visibility="{x:Bind ViewModel.HasError, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                <Button Content="&#xB85C;&#xADF8;&#xC778;"
+                        Command="{x:Bind ViewModel.LoginCommand}"
+                        IsEnabled="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
+                        HorizontalAlignment="Stretch"
+                        Style="{StaticResource NuriyeAccentButtonStyle}"/>
+
+                <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                              HorizontalAlignment="Center"/>
             </StackPanel>
-
-            <PasswordBox x:Name="PasswordBox"
-                         Header="관리자 비밀번호"
-                         PlaceholderText="비밀번호를 입력하세요"
-                         Password="{x:Bind ViewModel.Password, Mode=TwoWay}"
-                         KeyDown="PasswordBox_KeyDown"/>
-
-            <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
-                       Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                       Visibility="{x:Bind ViewModel.HasError, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
-            <Button Content="로그인"
-                    Command="{x:Bind ViewModel.LoginCommand}"
-                    IsEnabled="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
-                    HorizontalAlignment="Stretch"
-                    Style="{StaticResource AccentButtonStyle}"/>
-
-            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
-                          HorizontalAlignment="Center"/>
-        </StackPanel>
+        </Border>
     </Grid>
 </Page>

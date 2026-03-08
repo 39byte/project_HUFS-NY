@@ -10,24 +10,24 @@
 
     <NavigationView
         x:Name="NavView"
-        PaneTitle="누리예 대여"
+        PaneTitle="&#xB204;&#xB9AC;&#xC608; &#xB300;&#xC5EC;"
         IsBackButtonVisible="Collapsed"
         IsSettingsVisible="False"
         SelectionChanged="NavView_SelectionChanged">
 
         <NavigationView.MenuItems>
-            <NavigationViewItem Tag="calendar" Content="대여 현황">
+            <NavigationViewItem Tag="calendar" Content="&#xB300;&#xC5EC; &#xD604;&#xD669;">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE787;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem Tag="form" Content="대여 신청">
+            <NavigationViewItem Tag="form" Content="&#xB300;&#xC5EC; &#xC2E0;&#xCCAD;">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE8A5;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItemSeparator/>
-            <NavigationViewItem Tag="admin" Content="집행부 관리">
+            <NavigationViewItem Tag="admin" Content="&#xC9D1;&#xD589;&#xBD80; &#xAD00;&#xB9AC;">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE8D7;"/>
                 </NavigationViewItem.Icon>
@@ -35,12 +35,19 @@
         </NavigationView.MenuItems>
 
         <NavigationView.PaneFooter>
-            <Button x:Name="LogoutButton"
-                    Content="로그아웃"
-                    Click="Logout_Click"
-                    HorizontalAlignment="Stretch"
-                    Visibility="Collapsed"
-                    Margin="8,4,8,12"/>
+            <StackPanel Margin="8,0,8,8" Spacing="8">
+                <Button x:Name="LogoutButton"
+                        Content="&#xB85C;&#xADF8;&#xC544;&#xC6C3;"
+                        Click="Logout_Click"
+                        HorizontalAlignment="Stretch"
+                        Visibility="Collapsed"
+                        Style="{StaticResource NuriyeDefaultButtonStyle}"/>
+                <TextBlock Text="&#xC81C;&#xC791; | 45-1&#xAE30; &#xC554;&#xC2E4;&#xCC28;&#xC7A5; &#xD55C;&#xC9C0;&#xC6D0; &#xB7; Finance&amp;AI&#xC735;&#xD569;&#xD559;&#xBD80;"
+                           Foreground="{ThemeResource NuriyeTextTertiaryBrush}"
+                           FontSize="10"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
         </NavigationView.PaneFooter>
 
         <Frame x:Name="ContentFrame"/>

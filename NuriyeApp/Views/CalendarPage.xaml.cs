@@ -64,7 +64,9 @@ namespace NuriyeApp.Views
 
         private FrameworkElement BuildDayCell(CalendarDay day)
         {
-            var todayBg = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorAttentionBackgroundBrush"];
+            var todayBg = Application.Current.Resources.TryGetValue("NuriyeBrandGlowBrush", out var glowObj) && glowObj is Microsoft.UI.Xaml.Media.Brush glowBrush
+                ? glowBrush
+                : (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorAttentionBackgroundBrush"];
 
             var border = new Border
             {

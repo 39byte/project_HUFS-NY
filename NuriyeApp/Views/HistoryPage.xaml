@@ -17,10 +17,12 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8">
-            <TextBlock Text="전체 대여 이력"
+            <TextBlock Text="&#xC804;&#xCCB4; &#xB300;&#xC5EC; &#xC774;&#xB825;"
                        Style="{StaticResource SubtitleTextBlockStyle}"
                        VerticalAlignment="Center"/>
-            <Button Content="새로고침" Command="{x:Bind ViewModel.LoadCommand}"/>
+            <Button Content="&#xC0C8;&#xB85C;&#xACE0;&#xCE68;"
+                    Command="{x:Bind ViewModel.LoadCommand}"
+                    Style="{StaticResource NuriyeDefaultButtonStyle}"/>
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
                           Width="20" Height="20"/>
         </StackPanel>
@@ -31,20 +33,20 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             GridLinesVisibility="All"
-            AlternatingRowBackground="{ThemeResource CardBackgroundFillColorSecondaryBrush}">
+            AlternatingRowBackground="{ThemeResource NuriyeSurfaceAltBrush}">
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                <controls:DataGridTextColumn Header="신청자" Binding="{Binding Applicant}" Width="80"/>
-                <controls:DataGridTextColumn Header="연락처" Binding="{Binding Contact}" Width="110"/>
-                <controls:DataGridTextColumn Header="장비명" Binding="{Binding Equipment}" Width="200"/>
-                <controls:DataGridTextColumn Header="대여시작일" Binding="{Binding StartDate}" Width="100"/>
-                <controls:DataGridTextColumn Header="반납예정일" Binding="{Binding EndDate}" Width="100"/>
-                <controls:DataGridTextColumn Header="담당자" Binding="{Binding Staff}" Width="130"/>
-                <controls:DataGridTextColumn Header="상태" Binding="{Binding Status}" Width="80"/>
-                <controls:DataGridTextColumn Header="비고" Binding="{Binding Remarks}" Width="150"/>
-                <controls:DataGridTextColumn Header="실제반납일" Binding="{Binding ActualReturnDate}" Width="110"/>
-                <controls:DataGridTextColumn Header="액세서리" Binding="{Binding Accessories}" Width="150"/>
-                <controls:DataGridTextColumn Header="신청일시" Binding="{Binding SubmittedAt}" Width="130"/>
+                <controls:DataGridTextColumn Header="&#xC2E0;&#xCCAD;&#xC790;" Binding="{Binding Applicant}" Width="80"/>
+                <controls:DataGridTextColumn Header="&#xC5F0;&#xB77D;&#xCC98;" Binding="{Binding Contact}" Width="110"/>
+                <controls:DataGridTextColumn Header="&#xC7A5;&#xBE44;&#xBA85;" Binding="{Binding Equipment}" Width="200"/>
+                <controls:DataGridTextColumn Header="&#xB300;&#xC5EC;&#xC2DC;&#xC791;&#xC77C;" Binding="{Binding StartDate}" Width="100"/>
+                <controls:DataGridTextColumn Header="&#xBC18;&#xB0A9;&#xC608;&#xC815;&#xC77C;" Binding="{Binding EndDate}" Width="100"/>
+                <controls:DataGridTextColumn Header="&#xB2F4;&#xB2F9;&#xC790;" Binding="{Binding Staff}" Width="130"/>
+                <controls:DataGridTextColumn Header="&#xC0C1;&#xD0DC;" Binding="{Binding Status}" Width="80"/>
+                <controls:DataGridTextColumn Header="&#xBE44;&#xACE0;" Binding="{Binding Remarks}" Width="150"/>
+                <controls:DataGridTextColumn Header="&#xC2E4;&#xC81C;&#xBC18;&#xB0A9;&#xC77C;" Binding="{Binding ActualReturnDate}" Width="110"/>
+                <controls:DataGridTextColumn Header="&#xC561;&#xC138;&#xC11C;&#xB9AC;" Binding="{Binding Accessories}" Width="150"/>
+                <controls:DataGridTextColumn Header="&#xC2E0;&#xCCAD;&#xC77C;&#xC2DC;" Binding="{Binding SubmittedAt}" Width="130"/>
             </controls:DataGrid.Columns>
         </controls:DataGrid>
 

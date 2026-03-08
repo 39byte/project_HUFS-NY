@@ -1,0 +1,137 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.ThemeDictionaries>
+
+        <!-- ══════════ Light Theme ══════════ -->
+        <ResourceDictionary x:Key="Light">
+            <!-- Core palette -->
+            <Color x:Key="NuriyeBackgroundColor">#F5F5F5</Color>
+            <Color x:Key="NuriyeSurfaceColor">#FFFFFF</Color>
+            <Color x:Key="NuriyeSurfaceAltColor">#FAFAFA</Color>
+            <Color x:Key="NuriyeTextColor">#1A1A1A</Color>
+            <Color x:Key="NuriyeTextSecondaryColor">#666666</Color>
+            <Color x:Key="NuriyeTextTertiaryColor">#999999</Color>
+            <Color x:Key="NuriyeBrandColor">#B2DFDB</Color>
+            <Color x:Key="NuriyeBrandDarkColor">#00897B</Color>
+            <Color x:Key="NuriyeBrandDeepColor">#004D40</Color>
+            <Color x:Key="NuriyeBrandGlowColor">#59B2DFDB</Color>
+            <Color x:Key="NuriyeBorderColor">#E8E8E8</Color>
+            <Color x:Key="NuriyeInputBgColor">#FFFFFF</Color>
+            <Color x:Key="NuriyeNavActiveColor">#4DB2DFDB</Color>
+            <Color x:Key="NuriyeAccentRedColor">#EF5350</Color>
+            <Color x:Key="NuriyeAccentBlueColor">#42A5F5</Color>
+            <Color x:Key="NuriyeAccentGreenColor">#66BB6A</Color>
+            <Color x:Key="NuriyeAccentAmberColor">#FFA726</Color>
+            <Color x:Key="NuriyeTitleBarTextColor">#004D40</Color>
+
+            <!-- D-Day Badge -->
+            <Color x:Key="NuriyeDDayNormalBgColor">#E8F5E9</Color>
+            <Color x:Key="NuriyeDDayNormalFgColor">#2E7D32</Color>
+            <Color x:Key="NuriyeDDayWarningBgColor">#FFF3E0</Color>
+            <Color x:Key="NuriyeDDayWarningFgColor">#E65100</Color>
+            <Color x:Key="NuriyeDDayCriticalBgColor">#FFEBEE</Color>
+            <Color x:Key="NuriyeDDayCriticalFgColor">#C62828</Color>
+
+            <!-- Brushes -->
+            <SolidColorBrush x:Key="NuriyeBackgroundBrush" Color="#F5F5F5"/>
+            <SolidColorBrush x:Key="NuriyeSurfaceBrush" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="NuriyeSurfaceAltBrush" Color="#FAFAFA"/>
+            <SolidColorBrush x:Key="NuriyeTextBrush" Color="#1A1A1A"/>
+            <SolidColorBrush x:Key="NuriyeTextSecondaryBrush" Color="#666666"/>
+            <SolidColorBrush x:Key="NuriyeTextTertiaryBrush" Color="#999999"/>
+            <SolidColorBrush x:Key="NuriyeBrandBrush" Color="#B2DFDB"/>
+            <SolidColorBrush x:Key="NuriyeBrandDarkBrush" Color="#00897B"/>
+            <SolidColorBrush x:Key="NuriyeBrandDeepBrush" Color="#004D40"/>
+            <SolidColorBrush x:Key="NuriyeBrandGlowBrush" Color="#59B2DFDB"/>
+            <SolidColorBrush x:Key="NuriyeBorderBrush" Color="#E8E8E8"/>
+            <SolidColorBrush x:Key="NuriyeInputBgBrush" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="NuriyeNavActiveBrush" Color="#4DB2DFDB"/>
+            <SolidColorBrush x:Key="NuriyeAccentRedBrush" Color="#EF5350"/>
+            <SolidColorBrush x:Key="NuriyeAccentBlueBrush" Color="#42A5F5"/>
+            <SolidColorBrush x:Key="NuriyeAccentGreenBrush" Color="#66BB6A"/>
+            <SolidColorBrush x:Key="NuriyeAccentAmberBrush" Color="#FFA726"/>
+            <SolidColorBrush x:Key="NuriyeTitleBarTextBrush" Color="#004D40"/>
+
+            <SolidColorBrush x:Key="NuriyeDDayNormalBgBrush" Color="#E8F5E9"/>
+            <SolidColorBrush x:Key="NuriyeDDayNormalFgBrush" Color="#2E7D32"/>
+            <SolidColorBrush x:Key="NuriyeDDayWarningBgBrush" Color="#FFF3E0"/>
+            <SolidColorBrush x:Key="NuriyeDDayWarningFgBrush" Color="#E65100"/>
+            <SolidColorBrush x:Key="NuriyeDDayCriticalBgBrush" Color="#FFEBEE"/>
+            <SolidColorBrush x:Key="NuriyeDDayCriticalFgBrush" Color="#C62828"/>
+
+            <!-- NavigationView lightweight styling -->
+            <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#00897B"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelected" Color="#4DB2DFDB"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPointerOver" Color="#59B2DFDB"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPressed" Color="#66B2DFDB"/>
+        </ResourceDictionary>
+
+        <!-- ══════════ Dark Theme (Default) ══════════ -->
+        <ResourceDictionary x:Key="Default">
+            <!-- Core palette -->
+            <Color x:Key="NuriyeBackgroundColor">#1E1E1E</Color>
+            <Color x:Key="NuriyeSurfaceColor">#2D2D2D</Color>
+            <Color x:Key="NuriyeSurfaceAltColor">#252526</Color>
+            <Color x:Key="NuriyeTextColor">#E0E0E0</Color>
+            <Color x:Key="NuriyeTextSecondaryColor">#A0A0A0</Color>
+            <Color x:Key="NuriyeTextTertiaryColor">#707070</Color>
+            <Color x:Key="NuriyeBrandColor">#004D40</Color>
+            <Color x:Key="NuriyeBrandDarkColor">#00695C</Color>
+            <Color x:Key="NuriyeBrandDeepColor">#004246</Color>
+            <Color x:Key="NuriyeBrandGlowColor">#66004D40</Color>
+            <Color x:Key="NuriyeBorderColor">#3E3E3E</Color>
+            <Color x:Key="NuriyeInputBgColor">#3C3C3C</Color>
+            <Color x:Key="NuriyeNavActiveColor">#73004D40</Color>
+            <Color x:Key="NuriyeAccentRedColor">#FF5252</Color>
+            <Color x:Key="NuriyeAccentBlueColor">#448AFF</Color>
+            <Color x:Key="NuriyeAccentGreenColor">#69F0AE</Color>
+            <Color x:Key="NuriyeAccentAmberColor">#FFD740</Color>
+            <Color x:Key="NuriyeTitleBarTextColor">#B2DFDB</Color>
+
+            <!-- D-Day Badge -->
+            <Color x:Key="NuriyeDDayNormalBgColor">#1B5E20</Color>
+            <Color x:Key="NuriyeDDayNormalFgColor">#A5D6A7</Color>
+            <Color x:Key="NuriyeDDayWarningBgColor">#4E342E</Color>
+            <Color x:Key="NuriyeDDayWarningFgColor">#FFB74D</Color>
+            <Color x:Key="NuriyeDDayCriticalBgColor">#4A1A1A</Color>
+            <Color x:Key="NuriyeDDayCriticalFgColor">#FF8A80</Color>
+
+            <!-- Brushes -->
+            <SolidColorBrush x:Key="NuriyeBackgroundBrush" Color="#1E1E1E"/>
+            <SolidColorBrush x:Key="NuriyeSurfaceBrush" Color="#2D2D2D"/>
+            <SolidColorBrush x:Key="NuriyeSurfaceAltBrush" Color="#252526"/>
+            <SolidColorBrush x:Key="NuriyeTextBrush" Color="#E0E0E0"/>
+            <SolidColorBrush x:Key="NuriyeTextSecondaryBrush" Color="#A0A0A0"/>
+            <SolidColorBrush x:Key="NuriyeTextTertiaryBrush" Color="#707070"/>
+            <SolidColorBrush x:Key="NuriyeBrandBrush" Color="#004D40"/>
+            <SolidColorBrush x:Key="NuriyeBrandDarkBrush" Color="#00695C"/>
+            <SolidColorBrush x:Key="NuriyeBrandDeepBrush" Color="#004246"/>
+            <SolidColorBrush x:Key="NuriyeBrandGlowBrush" Color="#66004D40"/>
+            <SolidColorBrush x:Key="NuriyeBorderBrush" Color="#3E3E3E"/>
+            <SolidColorBrush x:Key="NuriyeInputBgBrush" Color="#3C3C3C"/>
+            <SolidColorBrush x:Key="NuriyeNavActiveBrush" Color="#73004D40"/>
+            <SolidColorBrush x:Key="NuriyeAccentRedBrush" Color="#FF5252"/>
+            <SolidColorBrush x:Key="NuriyeAccentBlueBrush" Color="#448AFF"/>
+            <SolidColorBrush x:Key="NuriyeAccentGreenBrush" Color="#69F0AE"/>
+            <SolidColorBrush x:Key="NuriyeAccentAmberBrush" Color="#FFD740"/>
+            <SolidColorBrush x:Key="NuriyeTitleBarTextBrush" Color="#B2DFDB"/>
+
+            <SolidColorBrush x:Key="NuriyeDDayNormalBgBrush" Color="#1B5E20"/>
+            <SolidColorBrush x:Key="NuriyeDDayNormalFgBrush" Color="#A5D6A7"/>
+            <SolidColorBrush x:Key="NuriyeDDayWarningBgBrush" Color="#4E342E"/>
+            <SolidColorBrush x:Key="NuriyeDDayWarningFgBrush" Color="#FFB74D"/>
+            <SolidColorBrush x:Key="NuriyeDDayCriticalBgBrush" Color="#4A1A1A"/>
+            <SolidColorBrush x:Key="NuriyeDDayCriticalFgBrush" Color="#FF8A80"/>
+
+            <!-- NavigationView lightweight styling -->
+            <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#00695C"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelected" Color="#73004D40"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPointerOver" Color="#80004D40"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPressed" Color="#8C004D40"/>
+        </ResourceDictionary>
+
+    </ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>
