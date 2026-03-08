@@ -72,8 +72,8 @@
         <ResourceDictionary x:Key="Default">
             <!-- Core palette -->
             <Color x:Key="NuriyeBackgroundColor">#1E1E1E</Color>
-            <Color x:Key="NuriyeSurfaceColor">#2D2D2D</Color>
-            <Color x:Key="NuriyeSurfaceAltColor">#252526</Color>
+            <Color x:Key="NuriyeSurfaceColor">#383838</Color>
+            <Color x:Key="NuriyeSurfaceAltColor">#2E2E2E</Color>
             <Color x:Key="NuriyeTextColor">#E0E0E0</Color>
             <Color x:Key="NuriyeTextSecondaryColor">#A0A0A0</Color>
             <Color x:Key="NuriyeTextTertiaryColor">#707070</Color>
@@ -100,8 +100,8 @@
 
             <!-- Brushes -->
             <SolidColorBrush x:Key="NuriyeBackgroundBrush" Color="#1E1E1E"/>
-            <SolidColorBrush x:Key="NuriyeSurfaceBrush" Color="#2D2D2D"/>
-            <SolidColorBrush x:Key="NuriyeSurfaceAltBrush" Color="#252526"/>
+            <SolidColorBrush x:Key="NuriyeSurfaceBrush" Color="#383838"/>
+            <SolidColorBrush x:Key="NuriyeSurfaceAltBrush" Color="#2E2E2E"/>
             <SolidColorBrush x:Key="NuriyeTextBrush" Color="#E0E0E0"/>
             <SolidColorBrush x:Key="NuriyeTextSecondaryBrush" Color="#A0A0A0"/>
             <SolidColorBrush x:Key="NuriyeTextTertiaryBrush" Color="#707070"/>
