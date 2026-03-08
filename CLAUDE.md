@@ -1,210 +1,283 @@
-# 작업 지시: PendingPage UI 수정 (승인 대기 탭)
+# 작업 지시: UI 버그 수정 및 개선 (7건)
 
-> 이 작업은 독립적인 3개 단계로 구성되어 있다. 각 단계 완료 후 커밋하라.
-> 중단 시 git log로 마지막 커밋을 확인하면 어디서 이어야 하는지 알 수 있다.
+> 독립적인 7개 작업이다. 각 작업 완료 후 즉시 커밋하라.
+> 중단 시 `git log --oneline -7`로 진행 상황을 확인할 수 있다.
 
 ---
 
-## STEP 1: 탭 이름 옆 빨간 배지 (숫자 표시)
+## FIX 1: 승인 대기 카드 선택 시 하이라이트 영역 불일치
 
-**현재**: "승인 대기" 탭에 대기 건수 표시 없음
-**목표**: "승인 대기" 탭 이름 오른쪽에 빨간 원형 배지로 대기 건수 표시 (예: 빨간 동그라미 안에 흰색 "2")
+**증상**: 카드를 선택하면 밝아지는 영역(ListView 기본 SelectionHighlight)이 카드 Border 위치/크기와 맞지 않음
+**원인**: ListView ItemTemplate 안에 Border를 넣었지만, ListViewItem 자체의 선택 효과가 별도로 존재
 
-### 수정 파일
-- `NuriyeApp/Views/MainPage.xaml`
-- `NuriyeApp/Views/MainPage.xaml.cs`
+### 수정 파일: `NuriyeApp/Views/PendingPage.xaml`
 
-### 구현 방법
-1. "승인 대기" TabViewItem의 Header를 단순 문자열 대신 StackPanel으로 교체:
+### 해결 방법
+ListView에 `ItemContainerStyle`을 추가하여 기본 선택 효과를 투명으로 만들고, 대신 DataTemplate 내 Border에 선택 시각 효과를 위임한다.
+
 ```xml
-<TabViewItem IsClosable="False">
-    <TabViewItem.Header>
-        <StackPanel Orientation="Horizontal" Spacing="6">
-            <TextBlock Text="승인 대기" VerticalAlignment="Center"/>
-            <Border x:Name="PendingBadge"
-                    Background="#EF5350"
-                    CornerRadius="10"
-                    MinWidth="20" Height="20"
-                    Padding="5,0"
-                    VerticalAlignment="Center"
-                    Visibility="Collapsed">
-                <TextBlock x:Name="PendingBadgeText"
-                           Foreground="White"
-                           FontSize="11"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-            </Border>
-        </StackPanel>
-    </TabViewItem.Header>
-    ...
-</TabViewItem>
+<ListView.ItemContainerStyle>
+    <Style TargetType="ListViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+</ListView.ItemContainerStyle>
 ```
 
-2. `MainPage.xaml.cs`에서 PendingPageControl의 데이터 로드 완료 후 배지 업데이트:
-   - `PendingPageControl.ViewModel.Rentals.CollectionChanged` 이벤트 구독
-   - 또는 탭 전환 시(`MainTabView_SelectionChanged`) 승인 대기 탭 진입 전에 갱신
-   - 건수가 0이면 `PendingBadge.Visibility = Collapsed`, 1 이상이면 `Visible`로 설정
-   - `PendingBadgeText.Text = count.ToString()`
+핵심: `HorizontalContentAlignment="Stretch"`와 `Padding="0"`으로 ListViewItem 내부 여백을 제거하여 카드 Border와 선택 하이라이트 영역을 일치시킨다.
 
 ### 커밋
 ```
-fix(ui): 승인 대기 탭에 빨간 배지로 대기 건수 표시
+fix(ui): 승인 대기 카드 선택 하이라이트 영역 정렬
 ```
 
 ---
 
-## STEP 2: 승인 대기 목록 카드 UI 개선
+## FIX 2: 승인 대기 카드 가로 길이 통일
 
-**현재**: 리스트 아이템이 평면적이고 신청자/장비/날짜 정보가 밀집되어 가독성 낮음
-**목표**: 각 항목이 둥근 카드 형태, 내부 레이아웃을 아래 구조로 변경
+**증상**: 카드마다 내용 길이에 따라 가로 폭이 다름
+**원인**: ListView 아이템이 내용에 맞춰 축소됨
 
-```
-┌─────────────────────────────────────────────────────┐
-│ 정하은                              2026-03-08 09:32 │
-│ 010-1234-5678                                       │
-│                                                     │
-│ Nikon D7500 + AF-S 50mm f/1.4                       │
-│                                                     │
-│ [03.12 ~ 03.15]  SD리더기                            │
-│  (초록 배지)       (회색 배지)                         │
-└─────────────────────────────────────────────────────┘
-```
+### 수정 파일: `NuriyeApp/Views/PendingPage.xaml`
 
-### 수정 파일
-- `NuriyeApp/Views/PendingPage.xaml` — ListView의 ItemTemplate만 교체
+### 해결 방법
+FIX 1의 `ItemContainerStyle`에 이미 `HorizontalContentAlignment="Stretch"`가 포함되어 있다. 이것이 적용되면 모든 카드가 ListView 전체 너비로 확장된다.
 
-### ItemTemplate 교체 내용
-
-```xml
-<DataTemplate x:DataType="models:Rental">
-    <Border Background="{ThemeResource NuriyeSurfaceBrush}"
-            BorderBrush="{ThemeResource NuriyeBorderBrush}"
-            BorderThickness="1"
-            CornerRadius="10"
-            Padding="16"
-            Margin="0,0,0,8">
-        <Grid RowSpacing="6">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- Row 0: 신청자 이름 + 날짜 -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Spacing="2">
-                    <TextBlock Text="{x:Bind Applicant}"
-                               Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Text="{x:Bind Contact}"
-                               Style="{StaticResource CaptionTextBlockStyle}"
-                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                </StackPanel>
-                <TextBlock Grid.Column="1"
-                           Text="{x:Bind SubmittedAt}"
-                           Style="{StaticResource CaptionTextBlockStyle}"
-                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                           VerticalAlignment="Top"/>
-            </Grid>
-
-            <!-- Row 1: 장비명 -->
-            <TextBlock Grid.Row="1"
-                       Text="{x:Bind Equipment}"
-                       TextWrapping="Wrap"
-                       Margin="0,4,0,0"/>
-
-            <!-- Row 2: 기간 배지 + 액세서리 배지 -->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
-                <Border Background="#E8F5E9" CornerRadius="4" Padding="8,3">
-                    <TextBlock Foreground="#2E7D32" FontSize="11" FontWeight="SemiBold">
-                        <Run Text="{x:Bind StartDate}"/>
-                        <Run Text=" ~ "/>
-                        <Run Text="{x:Bind EndDate}"/>
-                    </TextBlock>
-                </Border>
-                <Border Background="{ThemeResource NuriyeSurfaceAltBrush}"
-                        CornerRadius="4" Padding="8,3">
-                    <TextBlock Text="{x:Bind Accessories}"
-                               FontSize="11"
-                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                </Border>
-            </StackPanel>
-        </Grid>
-    </Border>
-</DataTemplate>
-```
-
-> **리소스 키 참고**: `NuriyeSurfaceBrush` 등이 없으면 아래 WinUI 기본 리소스로 대체:
-> - `NuriyeSurfaceBrush` → `CardBackgroundFillColorDefaultBrush`
-> - `NuriyeBorderBrush` → `CardStrokeColorDefaultBrush`
-> - `NuriyeSurfaceAltBrush` → `CardBackgroundFillColorSecondaryBrush`
+추가로 DataTemplate 내 최상위 Border에 아래 속성을 확인:
+- `HorizontalAlignment="Stretch"` (명시적 추가)
+- `MinWidth` 제거 (있다면)
 
 ### 커밋
 ```
-fix(ui): 승인 대기 목록 카드형 레이아웃 및 배지 UI 적용
+fix(ui): 승인 대기 카드 가로 길이 전체 너비로 통일
 ```
+
+> FIX 1과 FIX 2는 동일 파일의 연관 수정이므로 하나의 커밋으로 합쳐도 무방하다.
 
 ---
 
-## STEP 3: 우측 "신청 처리" 패널 정리
+## FIX 3: 승인 대기 카드 전체 크기 20% 확대
 
-**현재**: InfoBar에 파란 아이콘이 붙어있고, 장비 정보 카드가 목업과 다름
-**목표**: InfoBar를 제거하고, 깔끔한 Border 카드로 장비 정보 표시
+**증상**: 카드 내 텍스트와 여백이 작아 가시성 부족
+**목표**: 패딩, 폰트 크기, 배지 크기를 약 20% 키움
 
-### 수정 파일
-- `NuriyeApp/Views/PendingPage.xaml` — 우측 ScrollViewer 내부만 수정
+### 수정 파일: `NuriyeApp/Views/PendingPage.xaml` — DataTemplate 내부
 
 ### 변경 사항
 
-1. **InfoBar를 Border 카드로 교체**: 기존 `<InfoBar>` 제거 → `<Border>` 카드
-```xml
-<Border Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}"
-        CornerRadius="10"
-        Padding="16"
-        Margin="0,0,0,16">
-    <StackPanel Spacing="4">
-        <TextBlock Text="{x:Bind ViewModel.SelectedRental.Equipment, Mode=OneWay}"
-                   Style="{StaticResource BodyStrongTextBlockStyle}"
-                   TextWrapping="Wrap"/>
-        <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-            <Run Text="{x:Bind ViewModel.SelectedRental.StartDate, Mode=OneWay}"/>
-            <Run Text=" ~ "/>
-            <Run Text="{x:Bind ViewModel.SelectedRental.EndDate, Mode=OneWay}"/>
-        </TextBlock>
-        <TextBlock Text="{x:Bind ViewModel.SelectedRental.MeetingTime, Mode=OneWay}"
-                   Style="{StaticResource CaptionTextBlockStyle}"
-                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-        <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
-                   Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-            <Run Text="액세서리: "/>
-            <Run Text="{x:Bind ViewModel.SelectedRental.Accessories, Mode=OneWay}"/>
-        </TextBlock>
-    </StackPanel>
-</Border>
-```
-
-2. **승인/반려 버튼**: 승인 → `AccentButtonStyle` 유지, 반려 → 기본 스타일 유지. 동일 너비 가로 배치.
-
-3. 기존 `x:Name="RentalInfoBar"` 참조가 code-behind에 있으면 제거.
+| 요소 | 현재 | 변경 |
+|------|------|------|
+| 카드 Border Padding | `16` | `20` |
+| 카드 Border Margin(하단) | `8` | `10` |
+| 신청자 이름 (BodyStrongTextBlockStyle) | 기본(14) | `FontSize="17"` 명시 |
+| 연락처 (CaptionTextBlockStyle) | 기본(12) | `FontSize="14"` 명시 |
+| 장비명 TextBlock | 기본(14) | `FontSize="16"` 명시 |
+| 날짜 신청일시 (CaptionTextBlockStyle) | 기본(12) | `FontSize="13"` 명시 |
+| 기간 배지 내 텍스트 FontSize | `11` | `13` |
+| 기간 배지 Padding | `8,3` | `10,4` |
+| 액세서리 배지 내 텍스트 FontSize | `11` | `13` |
+| 액세서리 배지 Padding | `8,3` | `10,4` |
+| Grid RowSpacing | `6` | `8` |
 
 ### 커밋
 ```
-fix(ui): 신청 처리 패널 — InfoBar를 카드로 교체, 레이아웃 정리
+fix(ui): 승인 대기 카드 크기 및 텍스트 20% 확대
+```
+
+---
+
+## FIX 4: 승인 대기 카드 배경색을 배경보다 밝게
+
+**증상**: 다크 모드에서 카드 배경이 앱 배경과 비슷하거나 어두워서 구분이 안 됨
+**목표**: 카드가 배경보다 확실히 밝아야 함
+
+### 수정 파일: `NuriyeApp/Views/PendingPage.xaml` — DataTemplate 내 Border
+
+### 해결 방법
+카드 Border의 Background를 변경:
+
+**현재** (둘 중 하나일 것):
+```xml
+Background="{ThemeResource NuriyeSurfaceBrush}"
+<!-- 또는 -->
+Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+```
+
+**변경**:
+```xml
+Background="{ThemeResource LayerFillColorDefaultBrush}"
+```
+
+`LayerFillColorDefaultBrush`는 WinUI 기본 리소스로, 다크 모드에서 배경(#1E1E1E)보다 밝은 회색(약 #3A3A3A)을 제공한다. 만약 이것도 부족하면 `CardBackgroundFillColorDefaultBrush`를 사용하되, 앱 전체 배경이 이보다 어두운지 확인한다.
+
+또는 Themes/BrandColors.xaml에 커스텀 브러시를 정의:
+```xml
+<!-- Dark -->
+<SolidColorBrush x:Key="NuriyeCardBrush" Color="#383838"/>
+<!-- Light -->
+<SolidColorBrush x:Key="NuriyeCardBrush" Color="#FFFFFF"/>
+```
+
+### 커밋
+```
+fix(ui): 승인 대기 카드 배경색을 앱 배경보다 밝게 조정
+```
+
+---
+
+## FIX 5: 라이트 모드 전환 시 어두운 초록색이 민트색으로 안 바뀌는 오류
+
+**증상**: 다크 모드의 진한 초록(#004D40, #00695C 등)이 라이트 모드로 전환해도 그대로 유지됨
+**원인**: 하드코딩된 색상값이 ThemeDictionaries를 거치지 않고 직접 사용됨
+
+### 수정 대상 파일들
+- `NuriyeApp/Themes/BrandColors.xaml` — 테마 리소스 확인/추가
+- `NuriyeApp/Views/PendingPage.xaml` — 하드코딩 색상 제거
+- `NuriyeApp/Views/ShellPage.xaml` — NavigationView 관련
+- `NuriyeApp/Views/MainPage.xaml` — TabView 관련
+
+### 해결 방법
+
+1. **Themes/BrandColors.xaml에 아래 리소스가 Light/Dark 양쪽에 정의되어 있는지 확인**:
+
+```xml
+<ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Light">
+        <SolidColorBrush x:Key="NuriyeBrandBrush" Color="#B2DFDB"/>
+        <SolidColorBrush x:Key="NuriyeBrandDarkBrush" Color="#00897B"/>
+        <SolidColorBrush x:Key="NuriyeNavActiveBrush" Color="#4DB2DFDB"/>
+        <SolidColorBrush x:Key="NuriyeAccentBrush" Color="#00897B"/>
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+        <SolidColorBrush x:Key="NuriyeBrandBrush" Color="#004D40"/>
+        <SolidColorBrush x:Key="NuriyeBrandDarkBrush" Color="#00695C"/>
+        <SolidColorBrush x:Key="NuriyeNavActiveBrush" Color="#73004D40"/>
+        <SolidColorBrush x:Key="NuriyeAccentBrush" Color="#00695C"/>
+    </ResourceDictionary>
+</ResourceDictionary.ThemeDictionaries>
+```
+
+2. **모든 XAML 파일에서 하드코딩된 초록 계열 색상을 검색하여 ThemeResource로 교체**:
+
+```bash
+# 이 명령으로 하드코딩된 색상을 찾아라
+grep -rn "#004D40\|#00695C\|#004246\|#1B5E20" NuriyeApp/Views/ NuriyeApp/Themes/
+```
+
+- `Background="#004D40"` → `Background="{ThemeResource NuriyeBrandBrush}"`
+- `Background="#00695C"` → `Background="{ThemeResource NuriyeAccentBrush}"`
+- 기간 배지의 `Background="#E8F5E9"` / `Foreground="#2E7D32"`도 ThemeResource로 전환:
+  - BrandColors.xaml에 `NuriyeDateBadgeBgBrush` 추가 (Light: `#E8F5E9`, Dark: `#1B5E20`)
+  - BrandColors.xaml에 `NuriyeDateBadgeFgBrush` 추가 (Light: `#2E7D32`, Dark: `#A5D6A7`)
+
+3. **AccentButtonStyle의 Background도 확인**: 승인 버튼 등에서 `Background="#00695C"` 같은 하드코딩이 있으면 `NuriyeAccentBrush`로 교체
+
+### 커밋
+```
+fix(ui): 라이트/다크 모드 전환 시 브랜드 컬러 정상 반영
+```
+
+---
+
+## FIX 6: 대여 신청 탭에서 렌즈 선택 시 "장비 선택" 영역 좁아짐
+
+**증상**: 렌즈 ComboBox에서 항목을 선택하면 좌측 "장비 선택" 컬럼이 좁아짐
+**원인**: 렌즈명이 길어서 ComboBox가 확장되면서 Grid 컬럼 비율이 변동하거나, ComboBox에 고정 Width가 없어 내용에 따라 크기가 변함
+
+### 수정 파일: `NuriyeApp/Views/RentalFormPage.xaml`
+
+### 해결 방법
+
+1. 좌우 2컬럼 Grid의 ColumnDefinitions를 `*`에서 고정 비율로 변경:
+```xml
+<Grid.ColumnDefinitions>
+    <ColumnDefinition Width="*" MinWidth="300"/>
+    <ColumnDefinition Width="20"/>
+    <ColumnDefinition Width="*" MinWidth="300"/>
+</Grid.ColumnDefinitions>
+```
+
+2. 모든 ComboBox에 `HorizontalAlignment="Stretch"` 확인 및 `MaxWidth` 제거
+
+3. 렌즈 ComboBox의 ItemTemplate 내 TextBlock에 `TextTrimming="CharacterEllipsis"` 추가하여 긴 렌즈명이 넘치지 않게 처리
+
+### 커밋
+```
+fix(ui): 대여 신청 렌즈 선택 시 레이아웃 축소 방지
+```
+
+---
+
+## FIX 7: 대여 신청 탭에서 바디/렌즈 선택 취소 기능
+
+**증상**: 한번 선택한 바디/렌즈를 해제할 수 없음
+**목표**: "선택 안 함" 옵션을 추가하거나, 선택을 null로 되돌릴 수 있게 함
+
+### 수정 파일
+- `NuriyeApp/ViewModels/RentalFormViewModel.cs`
+- `NuriyeApp/Views/RentalFormPage.xaml`
+
+### 해결 방법
+
+**방법 A (권장): ComboBox에 PlaceholderText 활용 + 클리어 버튼**
+
+각 ComboBox 옆에 작은 "✕" 버튼을 추가:
+
+```xml
+<Grid ColumnSpacing="4">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <ComboBox Grid.Column="0"
+              Header="카메라 바디"
+              ItemsSource="{x:Bind ViewModel.Bodies, Mode=OneWay}"
+              SelectedItem="{x:Bind ViewModel.SelectedBody, Mode=TwoWay}"
+              HorizontalAlignment="Stretch"
+              PlaceholderText="바디 선택 (선택)">
+        <!-- 기존 ItemTemplate 유지 -->
+    </ComboBox>
+    <Button Grid.Column="1"
+            Content="✕"
+            VerticalAlignment="Bottom"
+            Margin="0,0,0,0"
+            Padding="8,6"
+            Command="{x:Bind ViewModel.ClearBodyCommand}"/>
+</Grid>
+```
+
+렌즈 ComboBox에도 동일하게 적용, `ClearLensCommand` 사용.
+
+**ViewModel 수정** (`RentalFormViewModel.cs`):
+
+```csharp
+[RelayCommand]
+private void ClearBody()
+{
+    SelectedBody = null;
+}
+
+[RelayCommand]
+private void ClearLens()
+{
+    SelectedLens = null;
+}
+```
+
+이 두 메서드만 추가하면 된다. 기존 `OnSelectedBodyChanged`에서 `null` 처리는 이미 되어 있다(`RefreshLenses(null)` 호출).
+
+### 커밋
+```
+feat(ui): 대여 신청 바디/렌즈 선택 취소(초기화) 버튼 추가
 ```
 
 ---
 
 ## 작업 완료 확인
 
-세 커밋이 모두 있으면 완료:
 ```bash
-git log --oneline -3
-# 예상:
-# fix(ui): 신청 처리 패널 — InfoBar를 카드로 교체, 레이아웃 정리
-# fix(ui): 승인 대기 목록 카드형 레이아웃 및 배지 UI 적용
-# fix(ui): 승인 대기 탭에 빨간 배지로 대기 건수 표시
+git log --oneline -7
 ```
+
+7개 (또는 FIX 1+2 합쳐서 6개) 커밋이 모두 있으면 완료.
