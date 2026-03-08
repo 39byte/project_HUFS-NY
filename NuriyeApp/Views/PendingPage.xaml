@@ -46,37 +46,63 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Rental">
-                        <Grid Padding="8" ColumnSpacing="12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Spacing="2">
-                                <TextBlock Text="{x:Bind Applicant}"
-                                           Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                                <TextBlock Text="{x:Bind Contact}"
-                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource NuriyeTextSecondaryBrush}"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" Spacing="2">
-                                <TextBlock Text="{x:Bind Equipment}" TextWrapping="Wrap"/>
-                                <TextBlock Foreground="{ThemeResource NuriyeTextSecondaryBrush}"
-                                           Style="{StaticResource CaptionTextBlockStyle}">
-                                    <Run Text="{x:Bind StartDate}"/>
-                                    <Run Text=" ~ "/>
-                                    <Run Text="{x:Bind EndDate}"/>
-                                </TextBlock>
-                                <TextBlock Text="{x:Bind Accessories}"
-                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource NuriyeTextSecondaryBrush}"/>
-                            </StackPanel>
-                            <TextBlock Grid.Column="2"
-                                       Text="{x:Bind SubmittedAt}"
-                                       Style="{StaticResource CaptionTextBlockStyle}"
-                                       Foreground="{ThemeResource NuriyeTextSecondaryBrush}"
-                                       VerticalAlignment="Top"/>
-                        </Grid>
+                        <Border Background="{ThemeResource NuriyeSurfaceBrush}"
+                                BorderBrush="{ThemeResource NuriyeBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Padding="16"
+                                Margin="0,0,0,8">
+                            <Grid RowSpacing="6">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Row 0: Applicant + Date -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Spacing="2">
+                                        <TextBlock Text="{x:Bind Applicant}"
+                                                   Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                        <TextBlock Text="{x:Bind Contact}"
+                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1"
+                                               Text="{x:Bind SubmittedAt}"
+                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                               VerticalAlignment="Top"/>
+                                </Grid>
+
+                                <!-- Row 1: Equipment -->
+                                <TextBlock Grid.Row="1"
+                                           Text="{x:Bind Equipment}"
+                                           TextWrapping="Wrap"
+                                           Margin="0,4,0,0"/>
+
+                                <!-- Row 2: Period badge + Accessories badge -->
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
+                                    <Border Background="#E8F5E9" CornerRadius="4" Padding="8,3">
+                                        <TextBlock Foreground="#2E7D32" FontSize="11" FontWeight="SemiBold">
+                                            <Run Text="{x:Bind StartDate}"/>
+                                            <Run Text=" ~ "/>
+                                            <Run Text="{x:Bind EndDate}"/>
+                                        </TextBlock>
+                                    </Border>
+                                    <Border Background="{ThemeResource NuriyeSurfaceAltBrush}"
+                                            CornerRadius="4" Padding="8,3">
+                                        <TextBlock Text="{x:Bind Accessories}"
+                                                   FontSize="11"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
