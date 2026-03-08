@@ -45,39 +45,67 @@
                               PlaceholderText="&#xCE74;&#xD14C;&#xACE0;&#xB9AC; &#xC120;&#xD0DD;"
                               Style="{StaticResource NuriyeComboBoxStyle}"/>
 
-                    <ComboBox Header="&#xCE74;&#xBA54;&#xB77C; &#xBC14;&#xB514;"
-                              ItemsSource="{x:Bind ViewModel.Bodies, Mode=OneWay}"
-                              SelectedItem="{x:Bind ViewModel.SelectedBody, Mode=TwoWay}"
-                              HorizontalAlignment="Stretch"
-                              PlaceholderText="&#xBC14;&#xB514; &#xC120;&#xD0DD; (&#xC120;&#xD0DD;)"
-                              Style="{StaticResource NuriyeComboBoxStyle}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="models:InventoryItem">
-                                <TextBlock>
-                                    <Run Text="{x:Bind Brand}"/>
-                                    <Run Text=" "/>
-                                    <Run Text="{x:Bind ModelName}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <Grid ColumnSpacing="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0"
+                                  Header="&#xCE74;&#xBA54;&#xB77C; &#xBC14;&#xB514;"
+                                  ItemsSource="{x:Bind ViewModel.Bodies, Mode=OneWay}"
+                                  SelectedItem="{x:Bind ViewModel.SelectedBody, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch"
+                                  PlaceholderText="&#xBC14;&#xB514; &#xC120;&#xD0DD; (&#xC120;&#xD0DD;)"
+                                  Style="{StaticResource NuriyeComboBoxStyle}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="models:InventoryItem">
+                                    <TextBlock>
+                                        <Run Text="{x:Bind Brand}"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{x:Bind ModelName}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Grid.Column="1"
+                                Content="&#x2715;"
+                                Command="{x:Bind ViewModel.ClearBodyCommand}"
+                                VerticalAlignment="Bottom"
+                                Width="32" Height="32"
+                                Padding="0"
+                                CornerRadius="8"/>
+                    </Grid>
 
-                    <ComboBox Header="&#xB80C;&#xC988;"
-                              ItemsSource="{x:Bind ViewModel.Lenses, Mode=OneWay}"
-                              SelectedItem="{x:Bind ViewModel.SelectedLens, Mode=TwoWay}"
-                              HorizontalAlignment="Stretch"
-                              PlaceholderText="&#xB80C;&#xC988; &#xC120;&#xD0DD; (&#xBC14;&#xB514; &#xBBF8;&#xC120;&#xD0DD; &#xC2DC; &#xC804;&#xCCB4; &#xB80C;&#xC988; &#xD45C;&#xC2DC;)"
-                              Style="{StaticResource NuriyeComboBoxStyle}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="models:InventoryItem">
-                                <TextBlock>
-                                    <Run Text="{x:Bind Brand}"/>
-                                    <Run Text=" "/>
-                                    <Run Text="{x:Bind ModelName}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <Grid ColumnSpacing="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0"
+                                  Header="&#xB80C;&#xC988;"
+                                  ItemsSource="{x:Bind ViewModel.Lenses, Mode=OneWay}"
+                                  SelectedItem="{x:Bind ViewModel.SelectedLens, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch"
+                                  PlaceholderText="&#xB80C;&#xC988; &#xC120;&#xD0DD; (&#xBC14;&#xB514; &#xBBF8;&#xC120;&#xD0DD; &#xC2DC; &#xC804;&#xCCB4; &#xB80C;&#xC988; &#xD45C;&#xC2DC;)"
+                                  Style="{StaticResource NuriyeComboBoxStyle}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="models:InventoryItem">
+                                    <TextBlock>
+                                        <Run Text="{x:Bind Brand}"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{x:Bind ModelName}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Grid.Column="1"
+                                Content="&#x2715;"
+                                Command="{x:Bind ViewModel.ClearLensCommand}"
+                                VerticalAlignment="Bottom"
+                                Width="32" Height="32"
+                                Padding="0"
+                                CornerRadius="8"/>
+                    </Grid>
 
                     <!-- Section: Accessories -->
                     <Border BorderBrush="{ThemeResource NuriyeBrandDarkBrush}"
