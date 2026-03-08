@@ -130,28 +130,29 @@
                     <StackPanel Spacing="12"
                                 Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
 
-                        <InfoBar IsOpen="True" IsClosable="False" Severity="Informational"
-                                 CornerRadius="10"
-                                 x:Name="RentalInfoBar">
-                            <InfoBar.Content>
-                                <StackPanel Spacing="4" Padding="0,4,0,8">
-                                    <TextBlock Text="{x:Bind ViewModel.SelectedRental.Equipment, Mode=OneWay}"
-                                               Style="{StaticResource BodyStrongTextBlockStyle}"
-                                               TextWrapping="Wrap"/>
-                                    <TextBlock Foreground="{ThemeResource NuriyeTextSecondaryBrush}">
-                                        <Run Text="{x:Bind ViewModel.SelectedRental.StartDate, Mode=OneWay}"/>
-                                        <Run Text=" ~ "/>
-                                        <Run Text="{x:Bind ViewModel.SelectedRental.EndDate, Mode=OneWay}"/>
-                                    </TextBlock>
-                                    <TextBlock Text="{x:Bind ViewModel.SelectedRental.MeetingTime, Mode=OneWay}"
-                                               Style="{StaticResource CaptionTextBlockStyle}"/>
-                                    <TextBlock Text="{x:Bind ViewModel.SelectedRental.Accessories, Mode=OneWay}"
-                                               Style="{StaticResource CaptionTextBlockStyle}"/>
-                                    <TextBlock Text="{x:Bind ViewModel.SelectedRental.ExtraRequest, Mode=OneWay}"
-                                               Style="{StaticResource CaptionTextBlockStyle}"/>
-                                </StackPanel>
-                            </InfoBar.Content>
-                        </InfoBar>
+                        <Border Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}"
+                                CornerRadius="10"
+                                Padding="16"
+                                Margin="0,0,0,16">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="{x:Bind ViewModel.SelectedRental.Equipment, Mode=OneWay}"
+                                           Style="{StaticResource BodyStrongTextBlockStyle}"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                                    <Run Text="{x:Bind ViewModel.SelectedRental.StartDate, Mode=OneWay}"/>
+                                    <Run Text=" ~ "/>
+                                    <Run Text="{x:Bind ViewModel.SelectedRental.EndDate, Mode=OneWay}"/>
+                                </TextBlock>
+                                <TextBlock Text="{x:Bind ViewModel.SelectedRental.MeetingTime, Mode=OneWay}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                                    <Run Text="&#xC561;&#xC138;&#xC11C;&#xB9AC;: "/>
+                                    <Run Text="{x:Bind ViewModel.SelectedRental.Accessories, Mode=OneWay}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
 
                         <ComboBox Header="&#xB2F4;&#xB2F9;&#xC790;"
                                   ItemsSource="{x:Bind ViewModel.StaffList}"
