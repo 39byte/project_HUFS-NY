@@ -23,8 +23,8 @@
             <!-- 2-Column Layout -->
             <Grid ColumnSpacing="20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" MinWidth="300"/>
+                    <ColumnDefinition Width="*" MinWidth="300"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- ══════════ Left Column: Equipment + Accessories + Extra Request ══════════ -->
