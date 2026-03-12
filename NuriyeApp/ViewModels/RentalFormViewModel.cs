@@ -113,6 +113,12 @@ namespace NuriyeApp.ViewModels
         }
 
         [RelayCommand]
+        private void ClearBody() => SelectedBody = null;
+
+        [RelayCommand]
+        private void ClearLens() => SelectedLens = null;
+
+        [RelayCommand]
         private async Task SubmitAsync()
         {
             StatusMessage = "";

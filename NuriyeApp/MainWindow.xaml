@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="누리예 카메라 대여 관리">
+    Title="&#xB204;&#xB9AC;&#xC608; &#xCE74;&#xBA54;&#xB77C; &#xB300;&#xC5EC; &#xAD00;&#xB9AC;">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />

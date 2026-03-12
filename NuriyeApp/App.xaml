@@ -8,7 +8,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <!-- Other merged dictionaries here -->
+                <ResourceDictionary Source="Themes/BrandColors.xaml"/>
+                <ResourceDictionary Source="Themes/ControlStyles.xaml"/>
+                <ResourceDictionary Source="Themes/CardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- Converters -->
             <local:InverseBoolConverter x:Key="InverseBoolConverter"/>

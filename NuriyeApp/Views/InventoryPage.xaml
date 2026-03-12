@@ -17,17 +17,23 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- 툴바 -->
+        <!-- Toolbar -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8">
-            <TextBlock Text="장비 목록"
+            <TextBlock Text="&#xC7A5;&#xBE44; &#xBAA9;&#xB85D;"
                        Style="{StaticResource SubtitleTextBlockStyle}"
                        VerticalAlignment="Center"/>
-            <Button Content="새로고침" Command="{x:Bind ViewModel.LoadCommand}"/>
-            <Button Content="행 추가" Command="{x:Bind ViewModel.AddItemCommand}"/>
-            <Button Content="선택 행 삭제" Command="{x:Bind ViewModel.RemoveItemCommand}"/>
-            <Button Content="저장"
+            <Button Content="&#xC0C8;&#xB85C;&#xACE0;&#xCE68;"
+                    Command="{x:Bind ViewModel.LoadCommand}"
+                    Style="{StaticResource NuriyeDefaultButtonStyle}"/>
+            <Button Content="&#xD589; &#xCD94;&#xAC00;"
+                    Command="{x:Bind ViewModel.AddItemCommand}"
+                    Style="{StaticResource NuriyeDefaultButtonStyle}"/>
+            <Button Content="&#xC120;&#xD0DD; &#xD589; &#xC0AD;&#xC81C;"
+                    Command="{x:Bind ViewModel.RemoveItemCommand}"
+                    Style="{StaticResource NuriyeDefaultButtonStyle}"/>
+            <Button Content="&#xC800;&#xC7A5;"
                     Command="{x:Bind ViewModel.SaveCommand}"
-                    Style="{StaticResource AccentButtonStyle}"/>
+                    Style="{StaticResource NuriyeAccentButtonStyle}"/>
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
                           Width="20" Height="20"/>
         </StackPanel>
@@ -39,14 +45,14 @@
             AutoGenerateColumns="False"
             IsReadOnly="False"
             GridLinesVisibility="All"
-            AlternatingRowBackground="{ThemeResource CardBackgroundFillColorSecondaryBrush}">
+            AlternatingRowBackground="{ThemeResource NuriyeSurfaceAltBrush}">
             <controls:DataGrid.Columns>
-                <controls:DataGridTextColumn Header="구분" Binding="{Binding Category}" Width="80"/>
-                <controls:DataGridTextColumn Header="카테고리" Binding="{Binding BodyCategory}" Width="100"/>
-                <controls:DataGridTextColumn Header="브랜드" Binding="{Binding Brand}" Width="100"/>
-                <controls:DataGridTextColumn Header="모델명" Binding="{Binding ModelName}" Width="200"/>
-                <controls:DataGridTextColumn Header="규격" Binding="{Binding Format}" Width="80"/>
-                <controls:DataGridTextColumn Header="상태" Binding="{Binding Status}" Width="100"/>
+                <controls:DataGridTextColumn Header="&#xAD6C;&#xBD84;" Binding="{Binding Category}" Width="80"/>
+                <controls:DataGridTextColumn Header="&#xCE74;&#xD14C;&#xACE0;&#xB9AC;" Binding="{Binding BodyCategory}" Width="100"/>
+                <controls:DataGridTextColumn Header="&#xBE0C;&#xB79C;&#xB4DC;" Binding="{Binding Brand}" Width="100"/>
+                <controls:DataGridTextColumn Header="&#xBAA8;&#xB378;&#xBA85;" Binding="{Binding ModelName}" Width="200"/>
+                <controls:DataGridTextColumn Header="&#xADDC;&#xACA9;" Binding="{Binding Format}" Width="80"/>
+                <controls:DataGridTextColumn Header="&#xC0C1;&#xD0DC;" Binding="{Binding Status}" Width="100"/>
             </controls:DataGrid.Columns>
         </controls:DataGrid>
 

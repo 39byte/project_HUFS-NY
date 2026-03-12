@@ -21,12 +21,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="누리예 카메라 대여 관리"
+            <TextBlock Text="&#xB204;&#xB9AC;&#xC608; &#xCE74;&#xBA54;&#xB77C; &#xB300;&#xC5EC; &#xAD00;&#xB9AC;"
                        Style="{StaticResource SubtitleTextBlockStyle}"
                        VerticalAlignment="Center"/>
-            <Button Grid.Column="1" Content="로그아웃"
+            <Button Grid.Column="1" Content="&#xB85C;&#xADF8;&#xC544;&#xC6C3;"
                     Click="LogoutButton_Click"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center"
+                    Style="{StaticResource NuriyeDefaultButtonStyle}"/>
         </Grid>
 
         <!-- Tab content -->
@@ -36,23 +37,42 @@
                  IsAddTabButtonVisible="False"
                  SelectionChanged="MainTabView_SelectionChanged">
 
-            <TabViewItem Header="승인 대기" IsClosable="False">
+            <TabViewItem IsClosable="False">
+                <TabViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <TextBlock Text="&#xC2B9;&#xC778; &#xB300;&#xAE30;" VerticalAlignment="Center"/>
+                        <Border x:Name="PendingBadge"
+                                Background="#EF5350"
+                                CornerRadius="10"
+                                MinWidth="20" Height="20"
+                                Padding="5,0"
+                                VerticalAlignment="Center"
+                                Visibility="Collapsed">
+                            <TextBlock x:Name="PendingBadgeText"
+                                       Foreground="White"
+                                       FontSize="11"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </TabViewItem.Header>
                 <local:PendingPage x:Name="PendingPageControl"/>
             </TabViewItem>
 
-            <TabViewItem Header="진행 중 대여" IsClosable="False">
+            <TabViewItem Header="&#xC9C4;&#xD589; &#xC911; &#xB300;&#xC5EC;" IsClosable="False">
                 <local:OngoingPage x:Name="OngoingPageControl"/>
             </TabViewItem>
 
-            <TabViewItem Header="전체 이력" IsClosable="False">
+            <TabViewItem Header="&#xC804;&#xCCB4; &#xC774;&#xB825;" IsClosable="False">
                 <local:HistoryPage x:Name="HistoryPageControl"/>
             </TabViewItem>
 
-            <TabViewItem Header="장비 목록" IsClosable="False">
+            <TabViewItem Header="&#xC7A5;&#xBE44; &#xBAA9;&#xB85D;" IsClosable="False">
                 <local:InventoryPage x:Name="InventoryPageControl"/>
             </TabViewItem>
 
-            <TabViewItem Header="설정" IsClosable="False">
+            <TabViewItem Header="&#xC124;&#xC815;" IsClosable="False">
                 <local:SettingsPage x:Name="SettingsPageControl"/>
             </TabViewItem>
         </TabView>

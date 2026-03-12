@@ -16,35 +16,47 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- 월 네비게이션 -->
+        <!-- Month Navigation -->
         <Grid Grid.Row="0" Padding="12,8" ColumnSpacing="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="◀ 이전달"
-                    Command="{x:Bind ViewModel.PrevMonthCommand}"/>
+            <Button Grid.Column="0" Content="&#x25C0; &#xC774;&#xC804;&#xB2EC;"
+                    Command="{x:Bind ViewModel.PrevMonthCommand}"
+                    Style="{StaticResource NuriyeDefaultButtonStyle}"/>
             <TextBlock Grid.Column="1"
                        Text="{x:Bind ViewModel.MonthTitle, Mode=OneWay}"
                        Style="{StaticResource SubtitleTextBlockStyle}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>
-            <Button Grid.Column="2" Content="다음달 ▶"
-                    Command="{x:Bind ViewModel.NextMonthCommand}"/>
+            <Button Grid.Column="2" Content="&#xB2E4;&#xC74C;&#xB2EC; &#x25B6;"
+                    Command="{x:Bind ViewModel.NextMonthCommand}"
+                    Style="{StaticResource NuriyeDefaultButtonStyle}"/>
         </Grid>
 
-        <!-- 로딩 -->
+        <!-- Loading -->
         <ProgressBar Grid.Row="1"
                      IsIndeterminate="True"
                      Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-        <!-- 요일 헤더 -->
-        <Grid Grid.Row="2" x:Name="DayHeaderGrid" Padding="12,4"/>
+        <!-- Day Headers -->
+        <Border Grid.Row="2" Background="{ThemeResource NuriyeSurfaceAltBrush}"
+                CornerRadius="8,8,0,0" Margin="12,4,12,0">
+            <Grid x:Name="DayHeaderGrid" Padding="0,4"/>
+        </Border>
 
-        <!-- 캘린더 바디 -->
-        <ScrollViewer Grid.Row="3" Padding="12,0,12,12">
-            <Grid x:Name="CalendarBodyGrid"/>
-        </ScrollViewer>
+        <!-- Calendar Body wrapped in Card -->
+        <Border Grid.Row="3"
+                Background="{ThemeResource NuriyeSurfaceBrush}"
+                BorderBrush="{ThemeResource NuriyeBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="0,0,12,12"
+                Margin="12,0,12,12">
+            <ScrollViewer Padding="0">
+                <Grid x:Name="CalendarBodyGrid"/>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Page>

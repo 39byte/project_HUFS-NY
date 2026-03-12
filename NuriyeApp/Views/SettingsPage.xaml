@@ -10,31 +10,34 @@
 
     <ScrollViewer Padding="16">
         <StackPanel MaxWidth="400" Spacing="16">
-            <TextBlock Text="설정"
+            <TextBlock Text="&#xC124;&#xC815;"
                        Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-            <TextBlock Text="관리자 비밀번호 변경"
+            <TextBlock Text="&#xAD00;&#xB9AC;&#xC790; &#xBE44;&#xBC00;&#xBC88;&#xD638; &#xBCC0;&#xACBD;"
                        Style="{StaticResource BodyStrongTextBlockStyle}"/>
 
-            <PasswordBox Header="현재 비밀번호"
+            <PasswordBox Header="&#xD604;&#xC7AC; &#xBE44;&#xBC00;&#xBC88;&#xD638;"
                          Password="{x:Bind ViewModel.CurrentPassword, Mode=TwoWay}"
-                         PlaceholderText="현재 비밀번호"/>
+                         PlaceholderText="&#xD604;&#xC7AC; &#xBE44;&#xBC00;&#xBC88;&#xD638;"
+                         Style="{StaticResource NuriyePasswordBoxStyle}"/>
 
-            <PasswordBox Header="새 비밀번호"
+            <PasswordBox Header="&#xC0C8; &#xBE44;&#xBC00;&#xBC88;&#xD638;"
                          Password="{x:Bind ViewModel.NewPassword, Mode=TwoWay}"
-                         PlaceholderText="새 비밀번호"/>
+                         PlaceholderText="&#xC0C8; &#xBE44;&#xBC00;&#xBC88;&#xD638;"
+                         Style="{StaticResource NuriyePasswordBoxStyle}"/>
 
-            <PasswordBox Header="새 비밀번호 확인"
+            <PasswordBox Header="&#xC0C8; &#xBE44;&#xBC00;&#xBC88;&#xD638; &#xD655;&#xC778;"
                          Password="{x:Bind ViewModel.ConfirmPassword, Mode=TwoWay}"
-                         PlaceholderText="새 비밀번호 다시 입력"/>
+                         PlaceholderText="&#xC0C8; &#xBE44;&#xBC00;&#xBC88;&#xD638; &#xB2E4;&#xC2DC; &#xC785;&#xB825;"
+                         Style="{StaticResource NuriyePasswordBoxStyle}"/>
 
             <TextBlock Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
                        Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
 
-            <Button Content="비밀번호 변경"
+            <Button Content="&#xBE44;&#xBC00;&#xBC88;&#xD638; &#xBCC0;&#xACBD;"
                     Command="{x:Bind ViewModel.ChangePasswordCommand}"
                     IsEnabled="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
-                    Style="{StaticResource AccentButtonStyle}"/>
+                    Style="{StaticResource NuriyeAccentButtonStyle}"/>
 
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
                           HorizontalAlignment="Left"/>
