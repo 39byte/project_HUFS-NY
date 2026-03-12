@@ -91,7 +91,7 @@
 
 - 집행부 관리 탭에서 승인 대기 항목 선택 시 '선택된 신청이 없습니다'로 표시되던 버그 수정 — `OnSelectedRentalChanging`에서 `OnSelectedRentalChanged`로 프로퍼티 변경 알림 이동
 
-### ny-a.1.3 (2026.03.12)
+### ny-a.1.3 (2026.03.08)
 
 **테마 시스템 구축**
 - `Themes/` 폴더에 BrandColors, ControlStyles, CardStyles ResourceDictionary를 생성하여 기존 웹사이트(style.css)의 브랜드 컬러 팔레트를 WinUI 3로 이식
